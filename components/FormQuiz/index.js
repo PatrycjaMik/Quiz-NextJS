@@ -1,7 +1,8 @@
 import { useForm } from "react-hook-form";
-import { quizData } from "../../mocks";
+import { Navigation, Pagination, Scrollbar, A11y } from "swiper";
+import { Swiper, SwiperSlide } from "swiper/react";
 
-export default function FormQuiz() {
+export default function FormQuiz({ data }) {
   const {
     register,
     handleSubmit,
@@ -16,58 +17,36 @@ export default function FormQuiz() {
       method="post"
       onSubmit={handleSubmit(onSubmit)}
     >
-      <p>{quizData[0].questionText}</p>
-      <div className="form-check">
-        <label for="odp1">
-          <input
-            {...register("UsersAnswer", { required: false })}
-            id={quizData[0].id}
-            type="radio"
-            value="odp1"
-            className="form-check-input"
-          />{" "}
-          {quizData[0].answers[0].answerText}
-        </label>
-      </div>
-
-      <div className="form-check">
-        <label for="odp2">
-          <input
-            {...register("UsersAnswer", { required: true })}
-            type="radio"
-            value="odp2"
-            className="form-check-input"
-            id={quizData[0].id}
-          />{" "}
-          {quizData[0].answers[1].answerText}
-        </label>
-      </div>
-
-      <div className="form-check">
-        <label for="odp3">
-          <input
-            {...register("UsersAnswer", { required: false })}
-            type="radio"
-            value="odp3"
-            className="form-check-input"
-            id={quizData[0].id}
-          />
-          {quizData[0].answers[2].answerText}
-        </label>
-      </div>
-
-      <div className="form-check">
-        <label for="odp4">
-          <input
-            {...register("UsersAnswer", { required: false })}
-            type="radio"
-            value="odp4"
-            className="form-check-input"
-            id={quizData[0].id}
-          />
-          {quizData[0].answers[3].answerText}
-        </label>
-      </div>
+      <Swiper
+        modules={[Navigation, Pagination, Scrollbar]}
+        spaceBetween={50}
+        slidesPerView={1}
+        navigation
+        pagination={{ clickable: true }}
+        onSwiper={(swiper) => console.log(swiper)}
+        onSlideChange={() => console.log("slide change")}
+      >
+        {data.questions.map(({ content, options, questionId }) => {
+          <SwiperSlide key={questionId}>
+            <div>
+              <p>{content}</p>
+              {options.map(({ content, optionId }) => (
+                <div className="form-check">
+                  <label for="odp1">
+                    <input
+                      {...register("UsersAnswer", { required: false })}
+                      value={optionId}
+                      type="radio"
+                      className="form-check-input"
+                    />{" "}
+                    {content}
+                  </label>
+                </div>
+              ))}
+            </div>
+          </SwiperSlide>;
+        })}
+      </Swiper>
 
       <div className="text-danger mt-2">
         {errors.favShow?.type === "required" && "Value is required"}

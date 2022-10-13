@@ -20,7 +20,7 @@ export default function QuizStartPage() {
     setUserEmail(Email);
   };
 
-  const submitUser = async (e) => {
+  /*const submitUser = async (e) => {
     e.preventDefault();
     const userdata = {
       UserName: username,
@@ -37,37 +37,46 @@ export default function QuizStartPage() {
       .then((result) => {
         console.log(result.userdata);
       });
-  };
+  };*/
 
   return (
     <div className={styles.startCard}>
       <div className={styles.formContainer}>
         <form onSubmit={submitUser} className={styles.formStartPage}>
-          <label className="inputName" for="username">
-            nazwa użytkownika
-          </label>
-          <input
-            className="registerInput"
-            id="UserName"
-            type="text"
-            required
-            onChange={(e) => handleUserName(e)}
-          />
-          {errors.userName && (
-            <span className={styles.errorMessage}>podaj nazwę użytkownika</span>
-          )}
-          <label className="inputName" for="email">
-            email
-          </label>
-          <input
-            className="registerInput"
-            id="Email"
-            type="email"
-            onChange={(e) => handleUserEmail(e)}
-          />
-          {errors.Email && (
-            <span className={styles.errorMessage}>wpisz swój email</span>
-          )}
+          <div className={styles.formWrapper}>
+            <label className="inputName" for="username">
+              nazwa użytkownika
+            </label>
+            <input
+              className="registerInput"
+              id="UserName"
+              type="text"
+              required
+              onChange={(e) => handleUserName(e)}
+            />
+            {errors.userName && (
+              <span className={styles.errorMessage}>
+                podaj nazwę użytkownika
+              </span>
+            )}
+            <label className="inputName" for="email">
+              email
+            </label>
+            <input
+              className="registerInput"
+              id="Email"
+              type="email"
+              onChange={(e) => handleUserEmail(e)}
+            />
+            {errors.Email && (
+              <span className={styles.errorMessage}>wpisz swój email</span>
+            )}
+          </div>
+          <div className={styles.btnWrapper}>
+            <button className={styles.submitBtn} onClick={() => submitUser}>
+              Zacznij quiz
+            </button>
+          </div>
         </form>
       </div>
     </div>
