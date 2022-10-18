@@ -1,10 +1,10 @@
 import { useForm } from "react-hook-form";
-import { Navigation, Pagination, Scrollbar, A11y } from "swiper";
+import { Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css/navigation";
 
 export default function FormQuiz({ data }) {
   const {
-    register,
     handleSubmit,
     formState: { errors },
   } = useForm();
@@ -18,39 +18,40 @@ export default function FormQuiz({ data }) {
       onSubmit={handleSubmit(onSubmit)}
     >
       <Swiper
-        modules={[Navigation, Pagination, Scrollbar]}
-        spaceBetween={50}
+        modules={[Navigation]}
         slidesPerView={1}
-        navigation
-        pagination={{ clickable: true }}
-        onSwiper={(swiper) => console.log(swiper)}
-        onSlideChange={() => console.log("slide change")}
+        navigation={true}
+        className=".swiper-container"
       >
-        {data.questions.map(({ content, options, questionId }) => {
-          <SwiperSlide key={questionId}>
+        {data.questions?.map((el) => {
+          return (
             <div>
-              <p>{content}</p>
-              {options.map(({ content, optionId }) => (
-                <div className="form-check">
-                  <label for="odp1">
-                    <input
-                      {...register("UsersAnswer", { required: false })}
-                      value={optionId}
-                      type="radio"
-                      className="form-check-input"
-                    />{" "}
-                    {content}
-                  </label>
+              <SwiperSlide key={el.questionId}>
+                <div>
+                  <p>{el.content}</p>
+                  {el.options?.map((element) => {
+                    return (
+                      <div className="form-check">
+                        <label htmlFor={toString(element.optionId)}>
+                          <input
+                            value={element.content}
+                            id={toString(element.optionId)}
+                            type="radio"
+                            className="form-check-input"
+                          />{" "}
+                        </label>
+                      </div>
+                    );
+                  })}
                 </div>
-              ))}
+              </SwiperSlide>
             </div>
-          </SwiperSlide>;
+          );
         })}
       </Swiper>
 
-      <div className="text-danger mt-2">
-        {errors.favShow?.type === "required" && "Value is required"}
-      </div>
+      <div className="swiper-button-prev"></div>
+      <div className="swiper-button-next"></div>
 
       <button type="submit" className="btn btn-primary mt-3">
         Submit

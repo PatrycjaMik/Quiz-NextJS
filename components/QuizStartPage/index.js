@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import styles from "../QuizStartPage/quizStartPage.module.scss";
 
-export default function QuizStartPage() {
+export default function QuizStartPage({ setQuizData }) {
   const {
     formState: { errors },
   } = useForm();
@@ -20,14 +20,14 @@ export default function QuizStartPage() {
     setUserEmail(Email);
   };
 
-  /*const submitUser = async (e) => {
+  const submitUser = async (e) => {
     e.preventDefault();
     const userdata = {
       UserName: username,
       Email: useremail,
       QuizId: 7,
       Agreements: true,
-      Description: "Pati z Zamościa",
+      Description: "Pati",
     };
     await axios
       .post(
@@ -35,10 +35,10 @@ export default function QuizStartPage() {
         userdata
       )
       .then((result) => {
-        console.log(result.userdata);
+        console.log(result);
+        setQuizData(result.data);
       });
-  };*/
-
+  };
   return (
     <div className={styles.startCard}>
       <div className={styles.formContainer}>
@@ -73,7 +73,7 @@ export default function QuizStartPage() {
             )}
           </div>
           <div className={styles.btnWrapper}>
-            <button className={styles.submitBtn} onClick={() => submitUser}>
+            <button className={styles.submitBtn} onClick={(e) => submitUser(e)}>
               Zacznij quiz
             </button>
           </div>
