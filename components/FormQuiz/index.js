@@ -1,6 +1,8 @@
 import { useForm } from "react-hook-form";
-import { Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
+import styles from "../FormQuiz/formQuiz.module.scss";
+import { Navigation } from "swiper";
+import "swiper/css";
 import "swiper/css/navigation";
 
 export default function FormQuiz({ data }) {
@@ -16,46 +18,42 @@ export default function FormQuiz({ data }) {
       action="api/quiz/SaveQuizResult"
       method="post"
       onSubmit={handleSubmit(onSubmit)}
+      className={styles.form}
     >
       <Swiper
-        modules={[Navigation]}
-        slidesPerView={1}
+        className={styles.swiperContainer}
         navigation={true}
-        className=".swiper-container"
+        modules={[Navigation]}
       >
         {data.questions?.map((el) => {
           return (
-            <div>
-              <SwiperSlide key={el.questionId}>
-                <div>
-                  <p>{el.content}</p>
-                  {el.options?.map((element) => {
-                    return (
-                      <div className="form-check">
-                        <label htmlFor={toString(element.optionId)}>
-                          <input
-                            value={element.content}
-                            id={toString(element.optionId)}
-                            type="radio"
-                            className="form-check-input"
-                          />{" "}
-                        </label>
-                      </div>
-                    );
-                  })}
-                </div>
-              </SwiperSlide>
-            </div>
+            <SwiperSlide key={el.questionId} className={styles.swiperQuestion}>
+              <div className={styles.swiperBlock}>
+                <p className={styles.question}>{el.content}</p>
+                {el.options?.map((element) => {
+                  return (
+                    <div className="form-check">
+                      <label htmlFor={toString(element.optionId)}>
+                        <input
+                          value={element.content}
+                          id={toString(element.optionId)}
+                          type="radio"
+                          className="form-check-input"
+                        />{" "}
+                      </label>
+                    </div>
+                  );
+                })}
+              </div>
+            </SwiperSlide>
           );
         })}
       </Swiper>
-
-      <div className="swiper-button-prev"></div>
-      <div className="swiper-button-next"></div>
-
-      <button type="submit" className="btn btn-primary mt-3">
-        Submit
-      </button>
+      <div className={styles.btnContainer}>
+        <button type="submit" className={styles.btnSubmit}>
+          Submit
+        </button>
+      </div>
     </form>
   );
 }
