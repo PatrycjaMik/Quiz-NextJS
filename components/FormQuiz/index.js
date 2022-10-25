@@ -7,7 +7,9 @@ import "swiper/css/navigation";
 
 export default function FormQuiz({ data }) {
   const {
+    register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm();
 
@@ -31,15 +33,44 @@ export default function FormQuiz({ data }) {
               <div className={styles.swiperBlock}>
                 <p className={styles.question}>{el.content}</p>
                 {el.options?.map((element) => {
-                  return (
+                  return el.options.length == 1 ? (
                     <div className="form-check">
                       <label htmlFor={toString(element.optionId)}>
                         <input
                           value={element.content}
                           id={toString(element.optionId)}
                           type="radio"
-                          className="form-check-input"
-                        />{" "}
+                          className={styles.radioInput}
+                        />
+                        {element.content}
+                        <input
+                          id={toString(element.optionId)}
+                          type="text"
+                          className={styles.textInput}
+                          {...register("answerRequired", {
+                            required: true,
+                          })}
+                        />
+                        {""}
+                      </label>
+                    </div>
+                  ) : (
+                    <div className="form-check">
+                      <label htmlFor={toString(element.optionId)}>
+                        <input
+                          value={element.content}
+                          id={toString(element.optionId)}
+                          type="radio"
+                          className={styles.radioInputVisible}
+                          {...register("answerRequired", { required: true })}
+                        />
+                        {element.content}
+                        <input
+                          value={element.content}
+                          id={toString(element.optionId)}
+                          type="text"
+                          className={styles.textInputHidden}
+                        />
                       </label>
                     </div>
                   );
