@@ -1,19 +1,49 @@
 import { useForm } from "react-hook-form";
 import { Swiper, SwiperSlide } from "swiper/react";
-import styles from "../FormQuiz/formQuiz.module.scss";
 import { Navigation } from "swiper";
+import styles from "../FormQuiz/formQuiz.module.scss";
+import axios from "axios";
+import React, { useEffect } from "react";
 import "swiper/css";
 import "swiper/css/navigation";
 
-export default function FormQuiz({ data }) {
+export default function FormQuiz({ data, loginData }) {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm();
 
   const onSubmit = (data) => console.log(data);
+
+  useEffect(() => {
+    console.log(errors);
+  }, [errors]);
+
+  const submitAnswers = async (e) => {
+    e.preventDefault();
+    const usersanswers = {
+      QuizId: loginData.quizId,
+      QuizVoteId: loginData.quizVoteId,
+      UserName: loginData.username,
+      Answers: [
+        {
+          QuestionId: userquestionid,
+          OptionId: useroptionid,
+          OpenAnswer: useropenanswer,
+        },
+      ],
+    };
+    await axios
+      .post(
+        "https://votingresults.polskieradio.pl/api/quiz/SaveQuizResult",
+        usersanswers
+      )
+      .then((result) => {
+        console.log(result);
+        data(result.data);
+      });
+  };
 
   return (
     <form
@@ -27,50 +57,37 @@ export default function FormQuiz({ data }) {
         navigation={true}
         modules={[Navigation]}
       >
-        {data.questions?.map((el) => {
+        {data?.questions?.map((el) => {
           return (
             <SwiperSlide key={el.questionId} className={styles.swiperQuestion}>
               <div className={styles.swiperBlock}>
                 <p className={styles.question}>{el.content}</p>
                 {el.options?.map((element) => {
-                  return el.options.length == 1 ? (
-                    <div className="form-check">
-                      <label htmlFor={toString(element.optionId)}>
-                        <input
-                          value={element.content}
-                          id={toString(element.optionId)}
-                          type="radio"
-                          className={styles.radioInput}
-                        />
+                  return (
+                    <div className="form-check" key={element.optionId}>
+                      <label htmlFor={String(element.optionId)}>
+                        {el.options.length > 1 && (
+                          <input
+                            id={String(element.optionId)}
+                            type="radio"
+                            value={element.optionId}
+                            className={styles.radioInput}
+                            {...register(String(el.questionId), {
+                              required: true,
+                            })}
+                          />
+                        )}
                         {element.content}
-                        <input
-                          id={toString(element.optionId)}
-                          type="text"
-                          className={styles.textInput}
-                          {...register("answerRequired", {
-                            required: true,
-                          })}
-                        />
-                        {""}
-                      </label>
-                    </div>
-                  ) : (
-                    <div className="form-check">
-                      <label htmlFor={toString(element.optionId)}>
-                        <input
-                          value={element.content}
-                          id={toString(element.optionId)}
-                          type="radio"
-                          className={styles.radioInputVisible}
-                          {...register("answerRequired", { required: true })}
-                        />
-                        {element.content}
-                        <input
-                          value={element.content}
-                          id={toString(element.optionId)}
-                          type="text"
-                          className={styles.textInputHidden}
-                        />
+                        {el.options.length === 1 && (
+                          <input
+                            id={String(element.optionId)}
+                            type="text"
+                            className={styles.textInput}
+                            {...register(String(el.questionId), {
+                              required: true,
+                            })}
+                          />
+                        )}
                       </label>
                     </div>
                   );

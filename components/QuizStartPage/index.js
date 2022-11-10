@@ -1,33 +1,20 @@
-import React, { useState } from "react";
-import { useForm } from "react-hook-form";
 import axios from "axios";
 import styles from "../QuizStartPage/quizStartPage.module.scss";
+import { QUIZ_ID } from "../../config";
 
-export default function QuizStartPage({ setQuizData }) {
+export default function QuizStartPage({ setQuizData, loginForm }) {
   const {
     formState: { errors },
-  } = useForm();
-  const [username, setUsername] = useState("");
-  const [useremail, setUserEmail] = useState("");
+    register,
+    setValue,
+    handleSubmit,
+  } = loginForm;
 
-  const handleUserName = (e) => {
-    const UserName = e.target.value;
-    setUsername(UserName);
-  };
-
-  const handleUserEmail = (e) => {
-    const Email = e.target.value;
-    setUserEmail(Email);
-  };
-
-  const submitUser = async (e) => {
-    e.preventDefault();
+  const submitUser = async (data) => {
     const userdata = {
-      UserName: username,
-      Email: useremail,
-      QuizId: 7,
+      ...data,
+      QuizId: QUIZ_ID,
       Agreements: true,
-      Description: "Pati",
     };
     await axios
       .post(
@@ -37,14 +24,20 @@ export default function QuizStartPage({ setQuizData }) {
       .then((result) => {
         console.log(result);
         setQuizData(result.data);
+        setValue("quizVoteId", result.data.quizVoteId);
       });
   };
+  console.log(loginForm);
+
   return (
     <div className={styles.startCard}>
       <div className={styles.formContainer}>
-        <form onSubmit={submitUser} className={styles.formStartPage}>
+        <form
+          onSubmit={handleSubmit(submitUser)}
+          className={styles.formStartPage}
+        >
           <div className={styles.formWrapper}>
-            <label className="inputName" for="username">
+            <label className="inputName" htmlFor="username">
               nazwa użytkownika
             </label>
             <input
@@ -52,28 +45,32 @@ export default function QuizStartPage({ setQuizData }) {
               id="UserName"
               type="text"
               required
-              onChange={(e) => handleUserName(e)}
+              {...register("UserName", {
+                required: true,
+              })}
             />
             {errors.userName && (
               <span className={styles.errorMessage}>
                 podaj nazwę użytkownika
               </span>
             )}
-            <label className="inputName" for="email">
+            <label className="inputName" htmlFor="email">
               email
             </label>
             <input
               className="registerInput"
               id="Email"
               type="email"
-              onChange={(e) => handleUserEmail(e)}
+              {...register("Email", {
+                required: true,
+              })}
             />
             {errors.Email && (
               <span className={styles.errorMessage}>wpisz swój email</span>
             )}
           </div>
           <div className={styles.btnWrapper}>
-            <button className={styles.submitBtn} onClick={(e) => submitUser(e)}>
+            <button className={styles.submitBtn} type="submit">
               Zacznij quiz
             </button>
           </div>
