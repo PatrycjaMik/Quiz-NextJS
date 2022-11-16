@@ -3,7 +3,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper";
 import styles from "../FormQuiz/formQuiz.module.scss";
 import axios from "axios";
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import "swiper/css";
 import "swiper/css/navigation";
 
@@ -14,11 +14,45 @@ export default function FormQuiz({ data, loginData }) {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => {
+    console.log(data);
+  };
 
-  useEffect(() => {
-    console.log(errors);
+  // const errorsArr = Object.entries(errors);
+  // errorsArr.forEach(([questId]) => {
+  //   console.log("questId: ", questId); //string
+  //   // console.log("errors: ", errors); //object
+  //   // console.log("errors length: ", errorsArr.length); //number
+  // });
+
+  const [swiper, setSwiper] = useState();
+
+  // const mojaFunkcja = (k) => {
+  //   swiper.slideTo(k, 800, false);
+  // };
+
+  React.useEffect(() => {
+    handleErrors();
   }, [errors]);
+
+  const handleErrors = () => {
+    const errorsId = Object.keys(errors);
+    if (errorsId.length > 0) {
+      const slideIndex = data.questions
+        .map((el) => String(el.questionId))
+        .indexOf(errorsId[0]);
+      if (swiper.activeIndex !== slideIndex)
+        swiper.slideTo(slideIndex, 800, true);
+    }
+  };
+
+  // funkcja powrotu do slajdu bez odp
+
+  //   funkcja SlideTo
+  // const [swiper, setSwiper] = useState();
+  // const handleSlideTo = () => {
+  //   swiper.slideTo(0, 800, false);
+  // };
 
   const submitAnswers = async (e) => {
     e.preventDefault();
@@ -56,6 +90,8 @@ export default function FormQuiz({ data, loginData }) {
         className={styles.swiperContainer}
         navigation={true}
         modules={[Navigation]}
+        onSwiper={(swiper) => setSwiper(swiper)}
+        onSlideChange={() => console.log(swiper?.activeIndex)}
       >
         {data?.questions?.map((el) => {
           return (
@@ -98,7 +134,14 @@ export default function FormQuiz({ data, loginData }) {
         })}
       </Swiper>
       <div className={styles.btnContainer}>
-        <button type="submit" className={styles.btnSubmit}>
+        <button
+          type="submit"
+          className={styles.btnSubmit}
+          onClick={() => {
+            handleSubmit(onSubmit);
+            handleErrors();
+          }}
+        >
           Submit
         </button>
       </div>
