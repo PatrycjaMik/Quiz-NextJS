@@ -14,22 +14,13 @@ export default function FormQuiz({ data, loginData }) {
     formState: { errors },
   } = useForm();
 
+  console.log("test");
+
   const onSubmit = (data) => {
     console.log(data);
   };
 
-  // const errorsArr = Object.entries(errors);
-  // errorsArr.forEach(([questId]) => {
-  //   console.log("questId: ", questId); //string
-  //   // console.log("errors: ", errors); //object
-  //   // console.log("errors length: ", errorsArr.length); //number
-  // });
-
   const [swiper, setSwiper] = useState();
-
-  // const mojaFunkcja = (k) => {
-  //   swiper.slideTo(k, 800, false);
-  // };
 
   React.useEffect(() => {
     handleErrors();
@@ -45,14 +36,6 @@ export default function FormQuiz({ data, loginData }) {
         swiper.slideTo(slideIndex, 800, true);
     }
   };
-
-  // funkcja powrotu do slajdu bez odp
-
-  //   funkcja SlideTo
-  // const [swiper, setSwiper] = useState();
-  // const handleSlideTo = () => {
-  //   swiper.slideTo(0, 800, false);
-  // };
 
   const submitAnswers = async (e) => {
     e.preventDefault();
