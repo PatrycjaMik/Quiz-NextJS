@@ -1,11 +1,8 @@
 import { useForm } from "react-hook-form";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation } from "swiper";
+import Carousel from "nuka-carousel";
 import styles from "../FormQuiz/formQuiz.module.scss";
 import axios from "axios";
 import React, { useState } from "react";
-import "swiper/css";
-import "swiper/css/navigation";
 
 export default function FormQuiz({ data, loginData }) {
   const {
@@ -14,13 +11,11 @@ export default function FormQuiz({ data, loginData }) {
     formState: { errors },
   } = useForm();
 
-  console.log("test");
-
   const onSubmit = (data) => {
     console.log(data);
   };
 
-  const [swiper, setSwiper] = useState();
+  const [activeIndex, setActiveIndex] = useState(0);
 
   React.useEffect(() => {
     handleErrors();
@@ -32,8 +27,7 @@ export default function FormQuiz({ data, loginData }) {
       const slideIndex = data.questions
         .map((el) => String(el.questionId))
         .indexOf(errorsId[0]);
-      if (swiper.activeIndex !== slideIndex)
-        swiper.slideTo(slideIndex, 800, true);
+      if (activeIndex !== slideIndex) setActiveIndex(slideIndex);
     }
   };
 
@@ -69,16 +63,29 @@ export default function FormQuiz({ data, loginData }) {
       onSubmit={handleSubmit(onSubmit)}
       className={styles.form}
     >
-      <Swiper
+      <Carousel
         className={styles.swiperContainer}
-        navigation={true}
-        modules={[Navigation]}
-        onSwiper={(swiper) => setSwiper(swiper)}
-        onSlideChange={() => console.log(swiper?.activeIndex)}
+        withoutControls={false}
+        adaptiveHeight={true}
+        slideIndex={activeIndex}
+        renderBottomCenterControls={true}
+        beforeSlide={(_, slideIndex) => setActiveIndex(slideIndex)}
+        defaultControlsConfig={{
+          prevButtonStyle: {
+            background: "black",
+            color: "yellow",
+          },
+          nextButtonStyle: {
+            background: "black",
+            color: "yellow",
+          },
+          prevButtonText: "<",
+          nextButtonText: ">",
+        }}
       >
         {data?.questions?.map((el) => {
           return (
-            <SwiperSlide key={el.questionId} className={styles.swiperQuestion}>
+            <div className={styles.swiperQuestion} key={el.questionId}>
               <div className={styles.swiperBlock}>
                 <p className={styles.question}>{el.content}</p>
                 {el.options?.map((element) => {
@@ -112,10 +119,10 @@ export default function FormQuiz({ data, loginData }) {
                   );
                 })}
               </div>
-            </SwiperSlide>
+            </div>
           );
         })}
-      </Swiper>
+      </Carousel>
       <div className={styles.btnContainer}>
         <button
           type="submit"

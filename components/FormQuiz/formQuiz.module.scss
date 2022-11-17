@@ -3,13 +3,7 @@
   height: 100%;
 }
 
-.swiper-slide {
-  text-align: center;
-  font-size: 18px;
-  background: rgb(236, 209, 7);
-}
-
-.swiperQuestion > div {
+.swiperQuestion>div {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -17,6 +11,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  padding: 30px;
 }
 
 .swiperBlock {
