@@ -1,6 +1,5 @@
 import { useForm } from "react-hook-form";
 import Carousel from "nuka-carousel";
-import styles from "../FormQuiz/formQuiz.module.scss";
 import axios from "axios";
 import React, { useState } from "react";
 
@@ -61,10 +60,8 @@ export default function FormQuiz({ data, loginData }) {
       action="api/quiz/SaveQuizResult"
       method="post"
       onSubmit={handleSubmit(onSubmit)}
-      className={styles.form}
     >
       <Carousel
-        className={styles.swiperContainer}
         withoutControls={false}
         adaptiveHeight={true}
         slideIndex={activeIndex}
@@ -83,11 +80,12 @@ export default function FormQuiz({ data, loginData }) {
           nextButtonText: ">",
         }}
       >
+        {/* , index */}
         {data?.questions?.map((el) => {
           return (
-            <div className={styles.swiperQuestion} key={el.questionId}>
-              <div className={styles.swiperBlock}>
-                <p className={styles.question}>{el.content}</p>
+            <div key={el.questionId}>
+              <div>
+                <p>{el.content}</p>
                 {el.options?.map((element) => {
                   return (
                     <div className="form-check" key={element.optionId}>
@@ -97,18 +95,17 @@ export default function FormQuiz({ data, loginData }) {
                             id={String(element.optionId)}
                             type="radio"
                             value={element.optionId}
-                            className={styles.radioInput}
                             {...register(String(el.questionId), {
                               required: true,
                             })}
                           />
                         )}
                         {element.content}
+                        {/* {index === data?.questions?.length && 'Ostatnie pytanie'} */}
                         {el.options.length === 1 && (
                           <input
                             id={String(element.optionId)}
                             type="text"
-                            className={styles.textInput}
                             {...register(String(el.questionId), {
                               required: true,
                             })}
@@ -123,10 +120,9 @@ export default function FormQuiz({ data, loginData }) {
           );
         })}
       </Carousel>
-      <div className={styles.btnContainer}>
+      <div>
         <button
           type="submit"
-          className={styles.btnSubmit}
           onClick={() => {
             handleSubmit(onSubmit);
             handleErrors();

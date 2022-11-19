@@ -1,8 +1,11 @@
 import React from "react";
+import Hero from "../components/Hero";
+import QuizStart from "../components/QuizStart";
 import QuizStartPage from "../components/QuizStartPage";
-import FormQuiz from "../components/FormQuiz/index.js";
-import styles from "../styles/Home.module.scss";
+import FormQuiz from "../components/FormQuiz/index.jsx";
+
 import { useForm } from "react-hook-form";
+
 
 export default function Home() {
   const [quiz, setQuiz] = React.useState();
@@ -12,8 +15,10 @@ export default function Home() {
   const loginData = watch();
 
   return (
-    <div className={styles.container}>
-      <main className={styles.main}>
+    <div>
+      <main>
+        <Hero />
+        <QuizStart/>
         {!quiz && <QuizStartPage setQuizData={setQuiz} loginForm={loginForm} />}
         {quiz && <FormQuiz data={quiz} loginData={loginData} />}
       </main>

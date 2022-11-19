@@ -1,5 +1,4 @@
 import axios from "axios";
-import styles from "../QuizStartPage/quizStartPage.module.scss";
 import { QUIZ_ID } from "../../config";
 
 export default function QuizStartPage({ setQuizData, loginForm }) {
@@ -30,18 +29,12 @@ export default function QuizStartPage({ setQuizData, loginForm }) {
   console.log(loginForm);
 
   return (
-    <div className={styles.startCard}>
-      <div className={styles.formContainer}>
-        <form
-          onSubmit={handleSubmit(submitUser)}
-          className={styles.formStartPage}
-        >
-          <div className={styles.formWrapper}>
-            <label className="inputName" htmlFor="username">
-              nazwa użytkownika
-            </label>
+    <div>
+      <div>
+        <form onSubmit={handleSubmit(submitUser)}>
+          <div>
+            <label htmlFor="username">nazwa użytkownika</label>
             <input
-              className="registerInput"
               id="UserName"
               type="text"
               required
@@ -49,30 +42,19 @@ export default function QuizStartPage({ setQuizData, loginForm }) {
                 required: true,
               })}
             />
-            {errors.userName && (
-              <span className={styles.errorMessage}>
-                podaj nazwę użytkownika
-              </span>
-            )}
-            <label className="inputName" htmlFor="email">
-              email
-            </label>
+            {errors.userName && <span>podaj nazwę użytkownika</span>}
+            <label htmlFor="email">email</label>
             <input
-              className="registerInput"
               id="Email"
               type="email"
               {...register("Email", {
                 required: true,
               })}
             />
-            {errors.Email && (
-              <span className={styles.errorMessage}>wpisz swój email</span>
-            )}
+            {errors.Email && <span>wpisz swój email</span>}
           </div>
-          <div className={styles.btnWrapper}>
-            <button className={styles.submitBtn} type="submit">
-              Zacznij quiz
-            </button>
+          <div>
+            <button type="submit">Zacznij quiz</button>
           </div>
         </form>
       </div>
