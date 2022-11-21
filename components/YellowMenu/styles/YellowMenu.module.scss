@@ -1,0 +1,46 @@
+.YMenuContainer {
+    width: 100%;
+    height: 80px;
+    background-color: #FDF200;
+    position: fixed;
+    top: 64px;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.stationLogo {
+    width: 106px;
+    height: 50px;
+    background-image: url('../../../public/images/czworka-logo.png');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.navigation {
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 80px;
+}
+
+.navLink {
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+    font-size: 26px;
+    font-weight: 700;
+    transition: transform 0.4s;
+}
+
+.navLink:hover {
+    transform: scale(1.2);
+}
+
+.decorDot {
+    width: 5px;
+    height: 5px;
+    background-color: #000000;
+}
