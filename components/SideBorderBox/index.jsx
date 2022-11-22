@@ -10,6 +10,7 @@ export const SideBorderBox = ({ children, className, containerClass, inverted })
       >
         <div className='border-1 border-black h-full w-full'>
         {children}
+        
 
         </div>
       </div>
