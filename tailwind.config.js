@@ -8,6 +8,9 @@ module.exports = {
     "./app/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
+    borderWidth: {
+      1: "1px",
+    },
     fontFamily: {
       oswald: ["Oswald", ...fontFamily.sans],
     },
