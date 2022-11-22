@@ -4,6 +4,7 @@ import QuizStart from "../components/QuizStart";
 import FormQuiz from "../components/FormQuiz/index.jsx";
 
 import { useForm } from "react-hook-form";
+import SmallerBlackMenu from "../components/SmallerBlackMenu/SmallerBlackMenu";
 
 
 export default function Home() {
@@ -15,7 +16,8 @@ export default function Home() {
 
   return (
     <div>
-      <main>
+      <SmallerBlackMenu />
+      <main style={{marginTop: "60px"}}>
         <Hero />
         {!quiz && <QuizStart setQuizData={setQuiz} loginForm={loginForm}/>}
         {quiz && <FormQuiz data={quiz} loginData={loginData} />}
