@@ -71,10 +71,16 @@
     @media (max-width: 1200px) {
         margin-left: 65px;
     }
+    @media (max-width: 520px) {
+        margin-left: 10px;
+    }
 }
 
 .socialLink {
     margin: 0 10px;
+    @media (max-width: 450px) {
+        margin: 0 5px;
+    }
 }
 
 .socFb {
@@ -133,5 +139,44 @@
     margin-left: 40px;
     @media (max-width: 991px) {
         display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        color: #000000;
+        font-size: 18px;
+        font-weight: 500;
+        font-family: 'Oswald', sans-serif;
+        text-transform: uppercase;
+        cursor: pointer;
+    }
+    @media (max-width: 450px) {
+        margin-left: 15px;
+    }
+}
+
+.arrowLeft {
+    width: 10px;
+    height: 16px;
+    background-image: url('../../../public/images/arr-b.png');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin-right: 5px;
+}
+
+.navigationMobile {
+    background-color: #fdf000;
+    position: absolute;
+    top: 105px;
+    right: 0;
+    width: 40%;
+    height: 360px;
+    padding: 25px 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+    z-index: 12;
+    @media (max-width: 545px) {
+        width: 60%;
     }
 }
