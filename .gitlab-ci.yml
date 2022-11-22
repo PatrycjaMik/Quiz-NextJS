@@ -33,7 +33,7 @@ docker-build:
   when: manual
 
 deploy-test:
-  extends: .pr-k8s-deploy
+  extends: .pr-k8s-deploy-v2
   stage: deploy-test
   needs: ['docker-build']
   when: manual
