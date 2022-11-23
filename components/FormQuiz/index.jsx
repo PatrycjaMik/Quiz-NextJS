@@ -62,6 +62,7 @@ export default function FormQuiz({ data, loginData }) {
       });
   };
 
+
   return (
     <section className="relative bg-black aspect-[320/1035] h-full">
       <div className="absolute  top-0 right-0 w-10/12 aspect-[249/138] ">
@@ -79,9 +80,7 @@ export default function FormQuiz({ data, loginData }) {
             className="h-full"
           >
             <Carousel
-              withoutControls={false}
-              slideIndex={activeIndex}
-              renderBottomCenterControls={true}
+              renderBottomCenterControls={false}
               beforeSlide={(_, slideIndex) => setActiveIndex(slideIndex)}
               renderCenterRightControls={({ nextSlide }) => (
                 <ArrowButton
@@ -95,31 +94,8 @@ export default function FormQuiz({ data, loginData }) {
                   className=" rotate-180 w-[45px] h-[45px] border-primary border-solid border-[2px] cursor-pointer right-full top-1/2 -translate-y-1/2"
                 />
               )}
-              // defaultControlsConfig={{
-              //   prevButtonStyle: {
-              //     background: "black",
-              //     color: "yellow",
-              //     border: "2px solid yellow",
-              //     borderRadius: "50%",
-              //     width: "45px",
-              //     height: "45px",
-              //     marginTop: "80px",
-              //   },
-              //   nextButtonStyle: {
-              //     background: "black",
-              //     color: "yellow",
-              //     border: "2px solid yellow",
-              //     borderRadius: "50%",
-              //     width: "45px",
-              //     height: "45px",
-              //     marginTop: "80px",
-              //   },
-              //   prevButtonText: "<",
-
-              //   nextButtonText: ">",
-              // }}
+      
             >
-              {/* , index */}
               {data?.questions?.map((el, index) => {
                 return (
                   <div className="relative" key={el.questionId}>
