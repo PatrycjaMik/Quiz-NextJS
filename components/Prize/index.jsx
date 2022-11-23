@@ -9,8 +9,8 @@ export default function Prize() {
       </div>
 
       <div className=" pt-16 w-[80%] m-auto">
-        <SideBorderBox containerClass=" h-[550px]" inverted={true}>
-          <div className="pt-10 w-[80%] m-auto">
+        <SideBorderBox containerClass=" h-[550px] border-black" inverted={true}>
+          <div className="pt-10 px-7 m-auto">
             <div className="flex flex-col px-5">
               <p className="font-oswald  font-[600] text-2xl tracking-[0.62px] ">
                 Nagroda w konkursie:
@@ -22,7 +22,7 @@ export default function Prize() {
                 nowoczesny głośnik Bluetooth z radiem cyfrowym DAB+ i FM
               </p>
             </div>
-            <div className="absolute">
+            <div className="absolute w-[260px] bottom-[9%] left-[50%] translate-y-1/2 -translate-x-1/2">
               <Image
                 src="/images/radio.png"
                 width="268px"
