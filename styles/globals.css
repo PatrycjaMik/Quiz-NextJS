@@ -17,3 +17,6 @@ a {
   box-sizing: border-box;
 }
 
+.slider-container {
+  height: 100%;
+}

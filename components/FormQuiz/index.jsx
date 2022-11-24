@@ -4,13 +4,18 @@ import axios from "axios";
 import React, { useState } from "react";
 import { SideBorderBox } from "../SideBorderBox";
 import Image from "next/image";
+import CustomRadio from "../CustomRadio";
+import { ArrowButton } from "../ArrowButton";
 
 export default function FormQuiz({ data, loginData, setQuizData }) {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm();
+
+  const vals = watch();
 
   const onSubmit = (data) => {
     console.log(data);
@@ -57,6 +62,7 @@ export default function FormQuiz({ data, loginData, setQuizData }) {
       });
   };
 
+
   return (
     <section className="relative bg-black aspect-[320/1035] h-full">
       <div className="absolute  top-0 right-0 w-10/12 aspect-[249/138] ">
@@ -71,64 +77,89 @@ export default function FormQuiz({ data, loginData, setQuizData }) {
             action="api/quiz/SaveQuizResult"
             method="post"
             onSubmit={handleSubmit(onSubmit)}
+            className="h-full"
           >
             <Carousel
-              withoutControls={false}
-              adaptiveHeight={true}
-              slideIndex={activeIndex}
-              renderBottomCenterControls={true}
+              renderBottomCenterControls={false}
               beforeSlide={(_, slideIndex) => setActiveIndex(slideIndex)}
-              defaultControlsConfig={{
-                prevButtonStyle: {
-                  background: "black",
-                  color: "yellow",
-                },
-                nextButtonStyle: {
-                  background: "black",
-                  color: "yellow",
-                },
-                prevButtonText: "<",
-                nextButtonText: ">",
-              }}
+              renderCenterRightControls={({ nextSlide }) => (
+                <ArrowButton
+                  onClick={nextSlide}
+                  className="w-[45px] h-[45px] border-primary border-solid border-[2px] cursor-pointer top-1/2 -translate-y-1/2"
+                />
+              )}
+              renderCenterLeftControls={({ previousSlide }) => (
+                <ArrowButton
+                  onClick={previousSlide}
+                  className=" rotate-180 w-[45px] h-[45px] border-primary border-solid border-[2px] cursor-pointer right-full top-1/2 -translate-y-1/2"
+                />
+              )}
+      
             >
-              {/* , index */}
-              {data?.questions?.map((el) => {
+              {data?.questions?.map((el, index) => {
                 return (
-                  <div key={el.questionId}>
+                  <div className="relative" key={el.questionId}>
+                    <div className="absolute  top-0 left-0 h-14 w-16 bg-[black] font-oswald flex justify-center items-center text-[26px] text-primary">
+                      {index + 1}
+                    </div>
                     <div>
-                      <p className="text-[26px] font-bold font-oswald text-center pt-14 w-[80%] border-solid border-b-[1px] border-black m-auto">
+                      <p className="text-[26px] font-bold font-oswald text-center pt-14 w-[70%] border-solid border-b-[1px] border-black m-auto">
                         {el.content}
                       </p>
                       {el.options?.map((element) => {
                         return (
-                          <div key={element.optionId}>
+                          <div key={element.optionId} className="my-4">
                             <label
                               htmlFor={String(element.optionId)}
-                              className=" px-5 font-oswald text-[24px] tracking-[.48px]"
+                              className=" px-5 font-oswald text-[24px] tracking-[.48px] flex items-center"
                             >
                               {el.options.length > 1 && (
-                                <input
-                                  id={String(element.optionId)}
-                                  type="radio"
-                                  value={element.optionId}
-                                  className=" text-gray-900 text-black text-black m-4"
-                                  {...register(String(el.questionId), {
-                                    required: true,
-                                  })}
-                                />
+                                <>
+                                  <input
+                                    id={String(element.optionId)}
+                                    type="radio"
+                                    value={element.optionId}
+                                    className="text-black m-4 w-5 h-5 hidden"
+                                    {...register(String(el.questionId), {
+                                      required: true,
+                                    })}
+                                  />
+                                  <CustomRadio
+                                    htmlFor={String(element.optionId)}
+                                    selected={
+                                      String(vals[el.questionId]) ===
+                                      String(element.optionId)
+                                    }
+                                  />
+                                </>
                               )}
-                              {element.content}
+                              <p className="ml-4">{element.content}</p>
                               {/* {index === data?.questions?.length && 'Ostatnie pytanie'} */}
                               {el.options.length === 1 && (
                                 <input
                                   id={String(element.optionId)}
                                   type="text"
+                                  className=" autofill:bg-primary h-[50px] w-[90%] mx-2 bg-black  outline-0 text-center text-white placeholder:text-white font-oswald text-[24px] w-full "
                                   {...register(String(el.questionId), {
                                     required: true,
                                   })}
                                 />
                               )}
                             </label>
+                            {index + 1 === data?.questions.length && (
+                              <div className="p-2 w-[90%] h-[30px] flex justify-center items-center">
+                                <button
+                                  type="submit"
+                                  onClick={() => {
+                                    handleSubmit(onSubmit);
+                                    handleErrors();
+                                  }}
+                                  className="bg-black  w-[150px] h-[50px] text-white font-oswald text-[24px]"
+                                >
+                                  Submit
+                                </button>
+                              </div>
+                            )}
                           </div>
                         );
                       })}
