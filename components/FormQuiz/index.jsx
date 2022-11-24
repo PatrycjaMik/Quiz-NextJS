@@ -7,7 +7,7 @@ import Image from "next/image";
 import CustomRadio from "../CustomRadio";
 import { ArrowButton } from "../ArrowButton";
 
-export default function FormQuiz({ data, loginData }) {
+export default function FormQuiz({ data, loginData, setQuizData }) {
   const {
     register,
     handleSubmit,
@@ -168,6 +168,18 @@ export default function FormQuiz({ data, loginData }) {
                 );
               })}
             </Carousel>
+            <div>
+              <button
+                type="submit"
+                onClick={() => {
+                  handleSubmit(onSubmit);
+                  handleErrors();
+                  setQuizData(10);
+                }}
+              >
+                Submit
+              </button>
+            </div>
           </form>
         </SideBorderBox>
       </div>

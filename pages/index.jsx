@@ -7,6 +7,7 @@ import Prize from "../components/Prize";
 import { useForm } from "react-hook-form";
 import SmallerBlackMenu from "../components/SmallerBlackMenu/SmallerBlackMenu";
 import YellowMenu from "../components/YellowMenu/YellowMenu";
+import QuizEnd from "../components/QuizEnd";
 
 export default function Home() {
   const [quiz, setQuiz] = React.useState();
@@ -22,7 +23,8 @@ export default function Home() {
       <main style={{ marginTop: "170px" }}>
         <Hero />
         {!quiz && <QuizStart setQuizData={setQuiz} loginForm={loginForm} />}
-        {quiz && <FormQuiz data={quiz} loginData={loginData} />}
+        {quiz && quiz !== 10 && <FormQuiz data={quiz} loginData={loginData} setQuizData={setQuiz} />}
+        {quiz === 10 && <QuizEnd />}
         <Prize />
       </main>
     </div>
