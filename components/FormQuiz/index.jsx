@@ -94,7 +94,6 @@ export default function FormQuiz({ data, loginData, setQuizData }) {
                   className=" rotate-180 w-[45px] h-[45px] border-primary border-solid border-[2px] cursor-pointer right-full top-1/2 -translate-y-1/2"
                 />
               )}
-      
             >
               {data?.questions?.map((el, index) => {
                 return (
