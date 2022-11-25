@@ -8,6 +8,7 @@ import QuizEnd from "../components/QuizEnd";
 import { useForm } from "react-hook-form";
 import SmallerBlackMenu from "../components/SmallerBlackMenu/SmallerBlackMenu";
 import YellowMenu from "../components/YellowMenu/YellowMenu";
+import ModalTerms from "../components/ModalTerms/ModalTerms";
 
 export default function Home() {
   const [quiz, setQuiz] = React.useState();
@@ -36,6 +37,7 @@ export default function Home() {
         {isQuizEnded && <QuizEnd />}
         <Prize />( ){" "}
       </main>
+      <ModalTerms />
     </div>
   );
 }
