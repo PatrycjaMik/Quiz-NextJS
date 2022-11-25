@@ -3,14 +3,15 @@ import Hero from "../components/Hero";
 import QuizStart from "../components/QuizStart";
 import FormQuiz from "../components/FormQuiz/index.jsx";
 import Prize from "../components/Prize";
+import QuizEnd from "../components/QuizEnd";
 
 import { useForm } from "react-hook-form";
 import SmallerBlackMenu from "../components/SmallerBlackMenu/SmallerBlackMenu";
 import YellowMenu from "../components/YellowMenu/YellowMenu";
-import QuizEnd from "../components/QuizEnd";
 
 export default function Home() {
   const [quiz, setQuiz] = React.useState();
+  const [isQuizEnded, setQuizEnded] = React.useState(false);
   const loginForm = useForm();
 
   const { watch } = loginForm;
@@ -22,10 +23,18 @@ export default function Home() {
       <YellowMenu />
       <main style={{ marginTop: "170px" }}>
         <Hero />
-        {!quiz && <QuizStart setQuizData={setQuiz} loginForm={loginForm} />}
-        {quiz && quiz !== 10 && <FormQuiz data={quiz} loginData={loginData} setQuizData={setQuiz} />}
-        {quiz === 10 && <QuizEnd />}
-        <Prize />
+        {!quiz && !isQuizEnded && (
+          <QuizStart setQuizData={setQuiz} loginForm={loginForm} />
+        )}
+        {quiz && !isQuizEnded && (
+          <FormQuiz
+            data={quiz}
+            loginData={loginData}
+            setQuizEnded={setQuizEnded}
+          />
+        )}
+        {isQuizEnded && <QuizEnd />}
+        <Prize />( ){" "}
       </main>
     </div>
   );

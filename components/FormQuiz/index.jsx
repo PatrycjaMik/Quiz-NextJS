@@ -6,8 +6,9 @@ import { SideBorderBox } from "../SideBorderBox";
 import Image from "next/image";
 import CustomRadio from "../CustomRadio";
 import { ArrowButton } from "../ArrowButton";
+import { QUIZ_ID } from "../../config";
 
-export default function FormQuiz({ data, loginData, setQuizData }) {
+export default function FormQuiz({ data, loginData, setQuizEnded }) {
   const {
     register,
     handleSubmit,
@@ -16,10 +17,6 @@ export default function FormQuiz({ data, loginData, setQuizData }) {
   } = useForm();
 
   const vals = watch();
-
-  const onSubmit = (data) => {
-    console.log(data);
-  };
 
   const [activeIndex, setActiveIndex] = useState(0);
 
@@ -37,19 +34,16 @@ export default function FormQuiz({ data, loginData, setQuizData }) {
     }
   };
 
-  const submitAnswers = async (e) => {
-    e.preventDefault();
+  const submitAnswers = async (data) => {
     const usersanswers = {
-      QuizId: loginData.quizId,
+      QuizId: QUIZ_ID,
       QuizVoteId: loginData.quizVoteId,
-      UserName: loginData.username,
-      Answers: [
-        {
-          QuestionId: userquestionid,
-          OptionId: useroptionid,
-          OpenAnswer: useropenanswer,
-        },
-      ],
+      UserName: loginData.UserName,
+      Answers: Object.entries(data).map(([QuestionId, OptionId]) => ({
+        QuestionId,
+        OptionId: !isNaN(OptionId) ? OptionId : 0,
+        OpenAnswer: isNaN(OptionId) ? OptionId : "",
+      })),
     };
     await axios
       .post(
@@ -57,11 +51,11 @@ export default function FormQuiz({ data, loginData, setQuizData }) {
         usersanswers
       )
       .then((result) => {
-        console.log(result);
         data(result.data);
-      });
+        setQuizEnded(true);
+      })
+      .catch((e) => console.log(e.message));
   };
-
 
   return (
     <section className="relative bg-black aspect-[320/1035] h-full">
@@ -73,14 +67,10 @@ export default function FormQuiz({ data, loginData, setQuizData }) {
           Co wiesz o Marii Konopnickiej?
         </p>
         <SideBorderBox containerClass=" h-[550px]">
-          <form
-            action="api/quiz/SaveQuizResult"
-            method="post"
-            onSubmit={handleSubmit(onSubmit)}
-            className="h-full"
-          >
+          <form onSubmit={handleSubmit(submitAnswers)} className="h-full">
             <Carousel
               renderBottomCenterControls={false}
+              slideIndex={activeIndex}
               beforeSlide={(_, slideIndex) => setActiveIndex(slideIndex)}
               renderCenterRightControls={({ nextSlide }) => (
                 <ArrowButton
@@ -133,7 +123,7 @@ export default function FormQuiz({ data, loginData, setQuizData }) {
                                 </>
                               )}
                               <p className="ml-4">{element.content}</p>
-                              {/* {index === data?.questions?.length && 'Ostatnie pytanie'} */}
+
                               {el.options.length === 1 && (
                                 <input
                                   id={String(element.optionId)}
@@ -150,7 +140,7 @@ export default function FormQuiz({ data, loginData, setQuizData }) {
                                 <button
                                   type="submit"
                                   onClick={() => {
-                                    handleSubmit(onSubmit);
+                                    handleSubmit(submitAnswers);
                                     handleErrors();
                                   }}
                                   className="bg-black  w-[150px] h-[50px] text-white font-oswald text-[24px]"
@@ -167,18 +157,6 @@ export default function FormQuiz({ data, loginData, setQuizData }) {
                 );
               })}
             </Carousel>
-            <div>
-              <button
-                type="submit"
-                onClick={() => {
-                  handleSubmit(onSubmit);
-                  handleErrors();
-                  setQuizData(10);
-                }}
-              >
-                Submit
-              </button>
-            </div>
           </form>
         </SideBorderBox>
       </div>
