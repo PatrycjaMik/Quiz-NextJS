@@ -22,10 +22,10 @@ const ModalTerms = () => {
 
     return (
         <div className={styles.mainBg} style={{ display: modalActive ? "flex" : "none" }}>
-            <button className={styles.closeBtn} onClick={() => setModalActive(false)}></button>
             <div className={styles.infoWrapper}>
                 <div className={styles.modalTop}>
                     <div className={styles.radioLogo}></div>
+                    <button className={styles.closeBtn} onClick={() => setModalActive(false)}></button>
                 </div>
                 <div className={styles.modalHeader}>
                     <h2>
@@ -36,7 +36,7 @@ const ModalTerms = () => {
                     </p>
                 </div>
                 <div className={styles.infoBox}>
-                    <ol>
+                    <ol className={styles.termsList}>
                         <li>1.&nbsp;Administratorem Danych jest Polskie Radio S.A. z siedzibą w Warszawie, al. Niepodległości 77/85, 00-977 Warszawa.</li>
                         <li>2.&nbsp;W sprawach związanych z Pani/a danymi należy kontaktować się z Inspektorem Ochrony Danych, e-mail: iod@polskieradio.pl, tel. 22 645 34 03.</li>
                         <li>3.&nbsp;Dane osobowe będą przetwarzane w celach marketingowych na podstawie zgody.</li>

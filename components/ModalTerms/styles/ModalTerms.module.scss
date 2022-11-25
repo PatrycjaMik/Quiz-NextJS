@@ -27,6 +27,8 @@
   position: relative;
   background-color: #fff402;
   box-shadow: 11px 7px 27px rgba(0, 0, 0, 0.64);
+  border: 3px solid black;
+  overflow: visible;
 }
 
 .modalTop {
@@ -40,7 +42,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 30px 0 0 50px;
+  padding: 30px 50px 0 50px;
 }
 
 .radioLogo {
@@ -60,8 +62,11 @@
   background-position: center;
   background-repeat: no-repeat;
   position: absolute;
-  top: 95px;
-  right: 170px;
+  top: -70px;
+  right: -70px;
+  @media (max-width: 1350px) {
+    position: inherit;
+  }
 }
 
 .modalHeader {
@@ -109,7 +114,32 @@
   ol {
     padding-bottom: 20px;
     border-bottom: 2px solid black;
+    @media (max-width: 550px) {
+      padding-right: 5px;
+      margin-bottom: 20px;
+      max-height: 340px;
+      overflow-y: scroll;
+    }
+    @media (max-width: 470px) {
+      max-height: 260px;
+    }
+    @media (max-width: 430px) {
+      max-height: 200px;
+    }
   }
+}
+
+.termsList::-webkit-scrollbar {
+  width: 5px;
+}
+
+.termsList::-webkit-scrollbar-track {
+  background: #ffffff;
+}
+
+.termsList::-webkit-scrollbar-thumb {
+  background: #000000;
+  border-radius: 5px;
 }
 
 .moreInfo {
@@ -121,6 +151,11 @@
   font-weight: 400;
   padding: 0 50px 10px 50px;
   margin-bottom: 20px;
+  @media (max-width: 789px) {
+    p {
+      margin-bottom: 20px;
+    }
+  }
 
   a {
     font-family: "Oswald", sans-serif;
@@ -139,21 +174,29 @@
 .modalButton {
   margin: 0;
   box-sizing: border-box;
-  display: block;
-  font-size: 14px;
+  font-size: 25px;
   font-weight: 700;
-  width: 131px;
   text-transform: uppercase;
-  height: 41px;
-  color: #fcfcfc;
+  color: #000000;
   border: none;
-  background-color: #4bbde1;
-  padding: 10px 20px;
+  background-color: #fff402;
+  padding: 20px 38px;
   cursor: pointer;
   margin-top: 10px;
-  transition: 0.2s;
+  transition: 0.5s;
+  border: 2px solid #000000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  bottom: -50px;
+  z-index: 150;
+  @media (max-width: 430px) {
+    left: 23%;
+  }
 }
 
 .modalButton:hover {
-  opacity: 0.8;
+  background-color: #000000;
+  color: #fff402;
 }
