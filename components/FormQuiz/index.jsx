@@ -9,7 +9,7 @@ import { ArrowButton } from "../ArrowButton";
 import { QUIZ_ID } from "../../config";
 import { ErrorMessage } from "@hookform/error-message";
 
-export default function FormQuiz({ data, loginData, setQuizEnded }) {
+export default function FormQuiz({ data, loginData, setIsQuizEnded, isQuizEnded }) {
   const {
     register,
     handleSubmit,
@@ -25,6 +25,7 @@ export default function FormQuiz({ data, loginData, setQuizEnded }) {
 
   React.useEffect(() => {
     handleErrors();
+    console.log(isQuizEnded);
   }, [errors]);
 
   const handleErrors = () => {
@@ -53,9 +54,9 @@ export default function FormQuiz({ data, loginData, setQuizEnded }) {
         "https://votingresults.polskieradio.pl/api/quiz/SaveQuizResult",
         usersanswers
       )
-      .then((result) => {
+      .then((result) => {     
+        setIsQuizEnded(true);
         data(result.data);
-        setQuizEnded(true);
       })
       .catch((e) => console.log(e.message));
   };
@@ -138,7 +139,6 @@ export default function FormQuiz({ data, loginData, setQuizEnded }) {
                                     type="text"
                                     className="fill:bg-primary h-[200px] w-full mx-2 bg-black  outline-0 text-white flex  placeholder:text-white font-oswald text-[24px] "
                                     {...register(
-                                      "singleErrorInput",
                                       String(el.questionId),
 
                                       {
