@@ -24,6 +24,7 @@ export default function FormQuiz({ data, loginData, setQuizEnded }) {
   const [activeIndex, setActiveIndex] = useState(0);
 
   React.useEffect(() => {
+    console.log(errors);
     handleErrors();
   }, [errors]);
 
@@ -75,15 +76,28 @@ export default function FormQuiz({ data, loginData, setQuizEnded }) {
               renderBottomCenterControls={false}
               slideIndex={activeIndex}
               beforeSlide={(_, slideIndex) => setActiveIndex(slideIndex)}
-              renderCenterRightControls={({ nextSlide }) => (
-                <ArrowButton
-                  onClick={nextSlide}
-                  className="w-[45px] h-[45px] border-primary border-solid border-[2px] cursor-pointer top-1/2 -translate-y-1/2"
-                />
-              )}
+              renderCenterRightControls={({ nextSlide }) => {
+                if (activeIndex < data.questions.length - 1)
+                  return (
+                    <ArrowButton
+                      onClick={nextSlide}
+                      className="w-[45px] h-[45px] border-primary border-solid border-[2px] cursor-pointer top-1/2 -translate-y-1/2"
+                    />
+                  );
+                return (
+                  <ArrowButton
+                    disabled={activeIndex === data.questions.length - 1}
+                    onClick={nextSlide}
+                    className="hidden w-[45px] h-[45px] border-primary border-solid border-[2px] cursor-pointer top-1/2 -translate-y-1/2"
+                  />
+                );
+              }}
               renderCenterLeftControls={({ previousSlide }) => (
                 <ArrowButton
-                  onClick={previousSlide}
+                  disabled={activeIndex === 0}
+                  onClick={() => {
+                    previousSlide();
+                  }}
                   className=" rotate-180 w-[45px] h-[45px] border-primary border-solid border-[2px] cursor-pointer right-full top-1/2 -translate-y-1/2"
                 />
               )}
@@ -116,7 +130,7 @@ export default function FormQuiz({ data, loginData, setQuizEnded }) {
                                       String(el.questionId),
 
                                       {
-                                        required: true,
+                                        required: "To pole jest wymagane",
                                       }
                                     )}
                                   />
@@ -130,46 +144,46 @@ export default function FormQuiz({ data, loginData, setQuizEnded }) {
                                   />
                                 </>
                               )}
-                              <div className="h-full w-[90%] flex flex-col">
+                              <div className="h-full w-[100%] flex flex-col">
                                 <p className="ml-4 ">{element.content}</p>
                                 {el.options.length === 1 && (
                                   <input
                                     id={String(element.optionId)}
                                     type="text"
-                                    className="fill:bg-primary h-[200px] w-full mx-2 bg-black  outline-0 text-white flex  placeholder:text-white font-oswald text-[24px] "
-                                    {...register(
-                                      "singleErrorInput",
-                                      String(el.questionId),
-
-                                      {
-                                        required: "To pole jest wymagane",
-                                      }
-                                    )}
+                                    className="fill:bg-primary h-[180px] w-full bg-black  outline-0 text-white flex justify-center placeholder:text-white font-oswald text-[24px] "
+                                    {...register(String(el.questionId), {
+                                      required: "To pole jest wymagane",
+                                    })}
                                   />
                                 )}
-
-                                <ErrorMessage
-                                  errors={errors}
-                                  render={({ message }) => <p>{message}</p>}
-                                />
                               </div>
                             </label>
                             {index + 1 === data?.questions.length && (
-                              <button
-                                type="submit"
-                                onClick={() => {
-                                  handleSubmit(submitAnswers);
-                                  handleErrors();
-                                }}
-                                className="absolute right-0 top-0 translate-x-1/2 translate-y-1/2 bg-primary border-solid border-black border-[3px]  w-[150px] h-[170px] text-black font-oswald text-[24px]"
-                              >
-                                Zatwierdź swoje odpowiedzi
-                              </button>
+                              <div className="ml-5 mt-4">
+                                <button
+                                  type="submit"
+                                  onClick={() => {
+                                    handleSubmit(submitAnswers);
+                                    handleErrors();
+                                  }}
+                                  className="leading-[26px] w-[45%] h-[100%] text-black font-oswald text-[29px] font-bold text-start"
+                                >
+                                  Zatwierdź swoje odpowiedzi
+                                </button>
+                              </div>
                             )}
                           </div>
                         );
                       })}
                     </div>
+                    <ErrorMessage
+                      errors={errors}
+                      name={String(el.questionId)}
+                      render={({ message }) => (
+                        <p className="text-[red] font-oswald ml-5">{message}</p>
+                      )}
+                    />
+                    {/* <p>{errors[el.questionId]?.message}</p> */}
                   </div>
                 );
               })}
