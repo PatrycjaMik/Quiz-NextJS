@@ -7,6 +7,7 @@ import Image from "next/image";
 import CustomRadio from "../CustomRadio";
 import { ArrowButton } from "../ArrowButton";
 import { QUIZ_ID } from "../../config";
+import { ErrorMessage } from "@hookform/error-message";
 
 export default function FormQuiz({ data, loginData, setQuizEnded }) {
   const {
@@ -17,6 +18,8 @@ export default function FormQuiz({ data, loginData, setQuizEnded }) {
   } = useForm();
 
   const vals = watch();
+
+  const EMPTY_OPEN_ANSWERID = "208";
 
   const [activeIndex, setActiveIndex] = useState(0);
 
@@ -41,7 +44,7 @@ export default function FormQuiz({ data, loginData, setQuizEnded }) {
       UserName: loginData.UserName,
       Answers: Object.entries(data).map(([QuestionId, OptionId]) => ({
         QuestionId,
-        OptionId: !isNaN(OptionId) ? OptionId : 0,
+        OptionId: !isNaN(OptionId) ? OptionId : EMPTY_OPEN_ANSWERID,
         OpenAnswer: isNaN(OptionId) ? OptionId : "",
       })),
     };
@@ -87,7 +90,7 @@ export default function FormQuiz({ data, loginData, setQuizEnded }) {
             >
               {data?.questions?.map((el, index) => {
                 return (
-                  <div className="relative" key={el.questionId}>
+                  <div className="relative h-full" key={el.questionId}>
                     <div className="absolute  top-0 left-0 h-14 w-16 bg-[black] font-oswald flex justify-center items-center text-[26px] text-primary">
                       {index + 1}
                     </div>
@@ -109,10 +112,15 @@ export default function FormQuiz({ data, loginData, setQuizEnded }) {
                                     type="radio"
                                     value={element.optionId}
                                     className="text-black m-4 w-5 h-5 hidden"
-                                    {...register(String(el.questionId), {
-                                      required: true,
-                                    })}
+                                    {...register(
+                                      String(el.questionId),
+
+                                      {
+                                        required: true,
+                                      }
+                                    )}
                                   />
+
                                   <CustomRadio
                                     htmlFor={String(element.optionId)}
                                     selected={
@@ -122,32 +130,41 @@ export default function FormQuiz({ data, loginData, setQuizEnded }) {
                                   />
                                 </>
                               )}
-                              <p className="ml-4">{element.content}</p>
+                              <div className="h-full w-[90%] flex flex-col">
+                                <p className="ml-4 ">{element.content}</p>
+                                {el.options.length === 1 && (
+                                  <input
+                                    id={String(element.optionId)}
+                                    type="text"
+                                    className="fill:bg-primary h-[200px] w-full mx-2 bg-black  outline-0 text-white flex  placeholder:text-white font-oswald text-[24px] "
+                                    {...register(
+                                      "singleErrorInput",
+                                      String(el.questionId),
 
-                              {el.options.length === 1 && (
-                                <input
-                                  id={String(element.optionId)}
-                                  type="text"
-                                  className=" autofill:bg-primary h-[50px] w-[90%] mx-2 bg-black  outline-0 text-center text-white placeholder:text-white font-oswald text-[24px] w-full "
-                                  {...register(String(el.questionId), {
-                                    required: true,
-                                  })}
+                                      {
+                                        required: "To pole jest wymagane",
+                                      }
+                                    )}
+                                  />
+                                )}
+
+                                <ErrorMessage
+                                  errors={errors}
+                                  render={({ message }) => <p>{message}</p>}
                                 />
-                              )}
+                              </div>
                             </label>
                             {index + 1 === data?.questions.length && (
-                              <div className="p-2 w-[90%] h-[30px] flex justify-center items-center">
-                                <button
-                                  type="submit"
-                                  onClick={() => {
-                                    handleSubmit(submitAnswers);
-                                    handleErrors();
-                                  }}
-                                  className="bg-black  w-[150px] h-[50px] text-white font-oswald text-[24px]"
-                                >
-                                  Submit
-                                </button>
-                              </div>
+                              <button
+                                type="submit"
+                                onClick={() => {
+                                  handleSubmit(submitAnswers);
+                                  handleErrors();
+                                }}
+                                className="absolute right-0 top-0 translate-x-1/2 translate-y-1/2 bg-primary border-solid border-black border-[3px]  w-[150px] h-[170px] text-black font-oswald text-[24px]"
+                              >
+                                Zatwierdź swoje odpowiedzi
+                              </button>
                             )}
                           </div>
                         );
