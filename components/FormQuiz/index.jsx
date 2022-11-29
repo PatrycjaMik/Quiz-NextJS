@@ -168,7 +168,7 @@ export default function FormQuiz({ data, loginData, setQuizEnded }) {
                                   }}
                                   className="leading-[26px] w-[45%] h-[100%] text-black font-oswald text-[29px] font-bold text-start"
                                 >
-                                  Zatwierdź swoje odpowiedzi
+                                  Wyślij
                                 </button>
                               </div>
                             )}

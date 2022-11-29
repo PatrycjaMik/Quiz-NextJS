@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { SideBorderBox } from "../SideBorderBox";
 
-export default function QuizEnd() {
+export default function PreStart() {
   return (
     <section className="relative bg-black aspect-[320/1035] h-full">
       <div className="absolute  top-0 right-0 w-10/12 aspect-[249/138] ">
@@ -16,20 +16,11 @@ export default function QuizEnd() {
         <SideBorderBox containerClass=" h-[550px]">
           <div className="flex justify-center items-center h-full">
             <div className="border-b-[1px] border-t-[1px] border-black w-[80%] p-1 ">
-              <p className=" text-[40px] font-bold font-oswald text-center pb-8">
-                QUIZ ZAKOŃCZONY
-              </p>
-              <p className=" text-[40px] font-bold font-oswald text-center pb-8">
-                DZIĘKUJEMY ZA UDZIAŁ
+              <p className=" text-[30px] font-bold font-oswald text-center pb-8">
+                QUIZ JESZCZE SIĘ NIE ROZPOCZĄŁ. SPRÓBUJ PONOWNIE PÓŹNIEJ
               </p>
             </div>
           </div>
-
-          {/* <div className="mt-20 p-5 bg-transparent mr-5 ml-5">
-            <p className=" text-[26px] font-bold font-oswald text-center pb-8">
-              Dziękujemy za udział
-            </p>
-          </div> */}
         </SideBorderBox>
         <SideBorderBox
           containerClass=" h-[87px] mt-12 z-10"
