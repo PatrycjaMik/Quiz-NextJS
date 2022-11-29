@@ -31,7 +31,10 @@ export default function QuizStart({ setQuizData, loginForm }) {
       });
   };
   return (
-    <section className="relative bg-black aspect-[320/1035] h-full">
+    <section
+      id="quizStart"
+      className="relative bg-black aspect-[320/1035] h-full"
+    >
       <div className="absolute  top-0 right-0 w-10/12 aspect-[249/138] ">
         <Image src="/images/topRightYellowDots.png" layout="fill" />
       </div>
