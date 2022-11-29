@@ -13,7 +13,7 @@ export const ArrowButton = ({
       disabled={disabled}
       onClick={onClick}
       className={clsxm(
-        "w-[98px] h-[98px] absolute bg-black border-solid border-[4px] border-white rounded-full transition-opacity",
+        "w-[98px] h-[98px] relative bg-black border-solid border-[4px] border-white rounded-full transition-opacity",
         className,
         { "opacity-70": disabled, "opacity-100": !disabled }
       )}

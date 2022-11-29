@@ -16,9 +16,9 @@ export default function QuizEnd() {
         <SideBorderBox containerClass=" h-[550px]">
           <div className="flex justify-center items-center h-full">
             <div className="border-b-[1px] border-t-[1px] border-black w-[80%] p-1 ">
-              <p className=" text-[40px] font-bold font-oswald text-center pb-8">
-                QUIZ ZAKOŃCZONY
-              </p>
+              {/* <p className=" text-[40px] font-bold font-oswald text-center pb-8">
+                QUIZ ZAKOŃCZONY // po zakonczeniu quizu
+              </p> */}
               <p className=" text-[40px] font-bold font-oswald text-center pb-8">
                 DZIĘKUJEMY ZA UDZIAŁ
               </p>

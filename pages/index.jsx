@@ -13,14 +13,32 @@ import ErrorModal from "../components/ErrorModal";
 import PreStart from "../components/PreStartQuiz";
 
 export default function Home() {
-  const [quiz, setQuiz] = React.useState();
-  const [isQuizEnded, setIsQuizEnded] = React.useState(false);
+  const [isLoggedIn, setLoggedIn] = React.useState(false); // użytkownik się zalogował i nie głosował wcześniej, quiz jest dostępny
+  const [isQuizFinished, setIsQuizFinished] = React.useState(false); // użytkownik wypełnił quiz i submitnął - quizEnd
+  const [isQuizAvailable, setQuizAvailable] = React.useState(true); // czy quiz może już być wypełniany (jeśli nie to komunikat, że jeszcze się nie rozpoczął) - prestart
+  const [isQuizExpired, setQuizExpired] = React.useState(false); // czy quiz może jeszcze być wypełniany (jeśli nie, to komunikat, że termin quizu upłynął) - errorModal 'quiz zakonczony'
+  const [isVotedAlready, setVotedAlready] = React.useState(false); // czy użytkownik już zagłosował (jeśli tak, to komunikat o tym)
   const loginForm = useForm();
 
   const { watch } = loginForm;
   const loginData = watch();
 
-  console.log(isQuizEnded);
+  console.log(isQuizFinished);
+
+  const shouldShowQuiz =
+    !isQuizFinished && !isQuizExpired && !isVotedAlready && isQuizAvailable;
+
+  // React.useEffect(() => {
+  //   const fetchQuizAvailability = async () => {
+  //     const {data} = await axios.get(awldknawldihqawliej)
+  //     return data
+  //   }
+  //   fetchQuizAvailability().then(data => handleSetAvailability(data))
+  // }, [])
+  // const handleSetAvailability = (data) => {
+  //   if(data.isStarted) setQuizAvailable(true)
+  //   if(data.isExpired) setQuizExpired(true)
+  // }
 
   return (
     <div>
@@ -28,18 +46,22 @@ export default function Home() {
       <YellowMenu />
       <main style={{ marginTop: "170px" }}>
         <Hero />
-        {!quiz && !isQuizEnded && (
-          <QuizStart setQuizData={setQuiz} loginForm={loginForm} />
+        {/* {!shouldShowQuiz && isQuizExpired && <ExpiredMessage />} */}
+        {/* {!shouldShowQuiz && !isAvailable && !isQuizExpired && <NotAvailableYetMessage />} prestart */}
+        {/* {!shouldShowQuiz && isQuizFinished && <ThankYouForVotingMessage /> quizEnd} */}
+        {/* {!shouldShowQuiz && isVotedAlready && <VotedAlreadyMessage />} */}
+        {!isLoggedIn && shouldShowQuiz && (
+          <QuizStart setQuizData={setLoggedIn} loginForm={loginForm} />
         )}
-        {quiz && !isQuizEnded && (
+        {isLoggedIn && shouldShowQuiz && (
           <FormQuiz
-            data={quiz}
+            data={isLoggedIn}
             loginData={loginData}
-            setIsQuizEnded={setIsQuizEnded}
+            setIsQuizEnded={setIsQuizFinished}
           />
         )}
-        {isQuizEnded && <QuizEnd />}
-        <Prize />{" "}
+        {isQuizFinished && <QuizEnd />}
+        <Prize />
       </main>
       <ModalTerms />
       <ErrorModal />
