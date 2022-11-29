@@ -14,11 +14,13 @@ import PreStart from "../components/PreStartQuiz";
 
 export default function Home() {
   const [quiz, setQuiz] = React.useState();
-  const [isQuizEnded, setQuizEnded] = React.useState(false);
+  const [isQuizEnded, setIsQuizEnded] = React.useState(false);
   const loginForm = useForm();
 
   const { watch } = loginForm;
   const loginData = watch();
+
+  console.log(isQuizEnded);
 
   return (
     <div>
@@ -33,7 +35,7 @@ export default function Home() {
           <FormQuiz
             data={quiz}
             loginData={loginData}
-            setQuizEnded={setQuizEnded}
+            setIsQuizEnded={setIsQuizEnded}
           />
         )}
         {isQuizEnded && <QuizEnd />}
