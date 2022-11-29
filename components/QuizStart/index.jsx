@@ -50,7 +50,7 @@ export default function QuizStart({ setQuizData, loginForm }) {
             </p>
           </div>
 
-          <div className="mt-20 p-5 bg-black mr-5 ml-5">
+          <div className="mt-20 p-5  mx-5 md:mx-auto md:flex justify-between items-center md:w-[80%]">
             <form onSubmit={handleSubmit(submitUser)}>
               <div>
                 <label htmlFor="username"></label>
@@ -70,7 +70,7 @@ export default function QuizStart({ setQuizData, loginForm }) {
                   placeholder="email"
                   id="Email"
                   type="email"
-                  className="p-2 bg-black  outline-0 text-center text-white placeholder:text-white font-oswald text-[24px] w-full "
+                  className="p-4 bg-black  outline-0 text-center text-white placeholder:text-white font-oswald text-[24px] w-full "
                   {...register("Email", {
                     required: true,
                   })}
@@ -79,10 +79,15 @@ export default function QuizStart({ setQuizData, loginForm }) {
               </div>
 
               <ArrowButton
-                className="absolute bottom-[0%] left-[50%] translate-y-1/2 -translate-x-1/2"
+                className="absolute bottom-[0%] left-[50%] translate-y-1/2 -translate-x-1/2 visible md:invisible"
                 type="submit"
               />
             </form>
+            <ArrowButton
+              className=" invisible md:visible"
+              type="submit"
+              onClick={handleSubmit(submitUser)}
+            />
           </div>
         </SideBorderBox>
         <SideBorderBox
