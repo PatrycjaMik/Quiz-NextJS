@@ -9,6 +9,7 @@ import { useForm } from "react-hook-form";
 import SmallerBlackMenu from "../components/SmallerBlackMenu/SmallerBlackMenu";
 import YellowMenu from "../components/YellowMenu/YellowMenu";
 import ModalTerms from "../components/ModalTerms/ModalTerms";
+import ErrorModal from "../components/ErrorModal";
 
 export default function Home() {
   const [quiz, setQuiz] = React.useState();
@@ -38,6 +39,7 @@ export default function Home() {
         <Prize />{" "}
       </main>
       <ModalTerms />
+      <ErrorModal />
     </div>
   );
 }
