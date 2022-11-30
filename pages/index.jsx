@@ -4,6 +4,7 @@ import QuizStart from "../components/QuizStart";
 import FormQuiz from "../components/FormQuiz/index.jsx";
 import Prize from "../components/Prize";
 import QuizEnd from "../components/QuizEnd";
+import axios from "axios";
 
 import { useForm } from "react-hook-form";
 import SmallerBlackMenu from "../components/SmallerBlackMenu/SmallerBlackMenu";
@@ -11,6 +12,8 @@ import YellowMenu from "../components/YellowMenu/YellowMenu";
 import ModalTerms from "../components/ModalTerms/ModalTerms";
 import ErrorModal from "../components/ErrorModal";
 import PreStart from "../components/PreStartQuiz";
+import { QUIZ_ID } from "../config";
+import { SideBorderBox } from "../components/SideBorderBox";
 
 export default function Home() {
   const [isLoggedIn, setLoggedIn] = React.useState(false); // użytkownik się zalogował i nie głosował wcześniej, quiz jest dostępny
@@ -23,7 +26,16 @@ export default function Home() {
   const { watch } = loginForm;
   const loginData = watch();
 
-  console.log(isQuizFinished);
+  React.useEffect(() => {
+    const fetchQuizData = async () => {
+      const { data } = axios.get(
+        `https://votingresults.polskieradio.pl/api/quiz/${QUIZ_ID}/details`
+      );
+      console.log(data);
+      return data;
+    };
+    fetchQuizData();
+  }, []);
 
   const shouldShowQuiz =
     !isQuizFinished && !isQuizExpired && !isVotedAlready && isQuizAvailable;
@@ -48,7 +60,6 @@ export default function Home() {
         <Hero />
         {/* {!shouldShowQuiz && isQuizExpired && <ExpiredMessage />} */}
         {/* {!shouldShowQuiz && !isAvailable && !isQuizExpired && <NotAvailableYetMessage />} prestart */}
-        {/* {!shouldShowQuiz && isQuizFinished && <ThankYouForVotingMessage /> quizEnd} */}
         {/* {!shouldShowQuiz && isVotedAlready && <VotedAlreadyMessage />} */}
         {!isLoggedIn && shouldShowQuiz && (
           <QuizStart setQuizData={setLoggedIn} loginForm={loginForm} />
@@ -57,10 +68,10 @@ export default function Home() {
           <FormQuiz
             data={isLoggedIn}
             loginData={loginData}
-            setIsQuizEnded={setIsQuizFinished}
+            setIsQuizFinished={setIsQuizFinished}
           />
         )}
-        {isQuizFinished && <QuizEnd />}
+        {!shouldShowQuiz && isQuizFinished && <QuizEnd />}
         <Prize />
       </main>
       <ModalTerms />

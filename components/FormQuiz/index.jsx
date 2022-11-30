@@ -9,7 +9,7 @@ import { ArrowButton } from "../ArrowButton";
 import { QUIZ_ID } from "../../config";
 import { ErrorMessage } from "@hookform/error-message";
 
-export default function FormQuiz({ data, loginData, setIsQuizEnded, isQuizEnded }) {
+export default function FormQuiz({ data, loginData, setIsQuizFinished }) {
   const {
     register,
     handleSubmit,
@@ -24,9 +24,7 @@ export default function FormQuiz({ data, loginData, setIsQuizEnded, isQuizEnded 
   const [activeIndex, setActiveIndex] = useState(0);
 
   React.useEffect(() => {
-    console.log(errors);
     handleErrors();
-    console.log(isQuizEnded);
   }, [errors]);
 
   const handleErrors = () => {
@@ -55,8 +53,8 @@ export default function FormQuiz({ data, loginData, setIsQuizEnded, isQuizEnded 
         "https://votingresults.polskieradio.pl/api/quiz/SaveQuizResult",
         usersanswers
       )
-      .then((result) => {     
-        setIsQuizEnded(true);
+      .then((result) => {
+        setIsQuizFinished(true);
         data(result.data);
       })
       .catch((e) => console.log(e.message));
@@ -82,7 +80,7 @@ export default function FormQuiz({ data, loginData, setIsQuizEnded, isQuizEnded 
                   return (
                     <ArrowButton
                       onClick={nextSlide}
-                      className="w-[45px] h-[45px] border-primary border-solid border-[2px] cursor-pointer top-1/2 -translate-y-1/2"
+                      className="w-[45px] h-[45px] left-full border-primary border-solid border-[2px] cursor-pointer top-1/2 -translate-y-1/2"
                     />
                   );
                 return (
