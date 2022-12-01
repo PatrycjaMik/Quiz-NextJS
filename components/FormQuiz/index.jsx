@@ -77,7 +77,10 @@ export default function FormQuiz({
         <p className="text-center text-3xl md:text-[35px] font-bold font-oswald text-primary font-[600] uppercase pt-1 md:mt-[60px] mb-16">
           Co wiesz o Marii Konopnickiej?
         </p>
-        <SideBorderBox containerClass=" h-[550px]" className="z-1">
+        <SideBorderBox
+          containerClass=" h-[550px] md:mr-[10px]  min-[768px]:w-[85%] min-[1180px]:w-full m-auto"
+          className="z-1"
+        >
           <form onSubmit={handleSubmit(submitAnswers)} className="h-full  p-2">
             <Carousel
               renderBottomCenterControls={false}
@@ -88,7 +91,7 @@ export default function FormQuiz({
                   return (
                     <ArrowButton
                       onClick={nextSlide}
-                      className="w-[45px] h-[45px] border-primary border-solid border-[2px] md:border-[4px] cursor-pointer top-1/2 -translate-y-1/2 translate-x-10 md:w-[80px] md:h-[80px]  lg:w-[110px] lg:h-[110px] md:translate-x-[60px]"
+                      className="w-[45px] h-[45px] border-primary border-solid border-[2px] md:border-[4px] cursor-pointer top-1/2 -translate-y-1/8 translate-x-10 md:w-[80px] md:h-[80px] min-[1024px]:translate-x-[150px] lg:w-[110px] lg:h-[110px] md:translate-x-[120px]"
                     />
                   );
                 return (
@@ -99,15 +102,19 @@ export default function FormQuiz({
                   />
                 );
               }}
-              renderCenterLeftControls={({ previousSlide }) => (
-                <ArrowButton
-                  disabled={activeIndex === 0}
-                  onClick={() => {
-                    previousSlide();
-                  }}
-                  className=" rotate-180 w-[45px] h-[45px] border-primary border-solid border-[2px] md:border-[4px] cursor-pointer right-full top-1/2 -translate-y-1/2 md:translate-x-10  md:w-[80px] md:h-[80px] lg:w-[110px] lg:h-[110px]"
-                />
-              )}
+              renderCenterLeftControls={({ previousSlide }) => {
+                if (activeIndex === 0) return null;
+
+                return (
+                  <ArrowButton
+                    disabled={activeIndex === 0}
+                    onClick={() => {
+                      previousSlide();
+                    }}
+                    className=" rotate-180 w-[45px] h-[45px] border-primary border-solid border-[2px] md:border-[4px] cursor-pointer right-full top-1/2 -translate-y-1/8 md:-translate-x-[55px]  md:w-[80px] md:h-[80px] lg:w-[110px] lg:h-[110px]"
+                  />
+                );
+              }}
             >
               {data?.questions?.map((el, index) => {
                 return (

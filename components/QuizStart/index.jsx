@@ -47,9 +47,9 @@ export default function QuizStart({ setQuizData, loginForm, setVotedAlready }) {
         <p className="text-center text-3xl font-bold font-oswald text-primary font-[600] uppercase pt-1 mb-16">
           Co wiesz o Marii Konopnickiej?
         </p>
-        <SideBorderBox containerClass=" h-[550px] max-w-screen-md md:m-auto">
+        <SideBorderBox containerClass=" h-[550px] max-w-[900px] md:m-auto">
           <div className="border-b-[1px] border-black w-[80%] p-1 m-auto mt-8 ">
-            <p className=" text-[24px] font-bold font-oswald text-center pb-8">
+            <p className=" text-[24px] md:my-4 md:text-[35px] font-bold font-oswald text-center pb-8">
               Podaj dane by rozpocząć quiz.
             </p>
           </div>
@@ -58,36 +58,38 @@ export default function QuizStart({ setQuizData, loginForm, setVotedAlready }) {
             <form onSubmit={handleSubmit(submitUser)}>
               <div className="md:w-full">
                 <label htmlFor="username"></label>
-                <input
-                  placeholder="username"
-                  id="UserName"
-                  type="text"
-                  required
-                  className=" p-4 bg-black outline-0  text-center md:text-left text-white placeholder:text-white font-oswald text-[24px] md:text-[30px] w-full md:w-[90%] border-b-[1px] border-primary"
-                  {...register("UserName", {
-                    required: true,
-                  })}
-                />
-                {errors.UserName && (
-                  <span className="font-oswald text-[14px] flex">
-                    podaj nazwę użytkownika
-                  </span>
-                )}
-                <label htmlFor="email"></label>
-                <input
-                  placeholder="email"
-                  id="Email"
-                  type="email"
-                  className="p-4 bg-black  outline-0 text-center md:text-left text-white placeholder:text-white font-oswald text-[24px] md:text-[30px] w-full md:w-[90%] "
-                  {...register("Email", {
-                    required: true,
-                  })}
-                />
-                {errors.Email && (
-                  <span className="font-oswald text-[14px] flex">
-                    wpisz swój email
-                  </span>
-                )}
+                <div className="bg-black p-5  min-[768px]:mr-4 lg:w-[470px]">
+                  <input
+                    placeholder="username"
+                    id="UserName"
+                    type="text"
+                    required
+                    className="pb-4 p-3 bg-black outline-0 text-center md:text-left text-white placeholder:text-white font-oswald text-[24px] md:text-[30px] w-full md:w-[90%] border-b-[1px] border-primary"
+                    {...register("UserName", {
+                      required: true,
+                    })}
+                  />
+                  {errors.UserName && (
+                    <span className="font-oswald text-[14px] flex">
+                      podaj nazwę użytkownika
+                    </span>
+                  )}
+                  <label htmlFor="email"></label>
+                  <input
+                    placeholder="e-mail"
+                    id="Email"
+                    type="email"
+                    className=" mt-2 p-3 bg-black outline-0 text-center md:text-left text-white placeholder:text-white font-oswald text-[24px] md:text-[30px] w-full md:w-[90%] "
+                    {...register("Email", {
+                      required: true,
+                    })}
+                  />
+                  {errors.Email && (
+                    <span className="font-oswald text-[14px] flex">
+                      wpisz swój email
+                    </span>
+                  )}
+                </div>
               </div>
 
               <ArrowButton
@@ -102,10 +104,9 @@ export default function QuizStart({ setQuizData, loginForm, setVotedAlready }) {
             />
           </div>
         </SideBorderBox>
-        <div className="md:flex md:justify-end md:pt-6 md:w-full">
+        <div className="md:flex md:justify-end  md:pt-6 md:w-[95%]">
           <SideBorderBox
-            containerClass=" h-[87px] my-12  md:mt-6 z-10 max-w-md  md:w-[80%]"
-            className=" w-[280px]"
+            containerClass=" h-[87px] my-12  md:mt-6 z-10 max-w-md  md:w-[280px]"
             inverted={true}
           >
             <Link href="/">

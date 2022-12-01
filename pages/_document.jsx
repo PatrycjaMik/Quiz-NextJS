@@ -21,7 +21,7 @@ export default function Document() {
       <meta property="og:title" content="Quiz o Marii Konopnickiej" />
       <meta property="og:url" content="/" />
       <meta property="og:type" content="website" />
-      <meta property="og:image" content="/images/konopnicka-tlo-02d1.png" />
+      <meta property="og:image" content="/images/polskieRadioLogo.png" />
       <meta
         property="og:description"
         content="Quiz o Marii Konopnickiej. Sprawdź się i wygraj radioodbiornik."
@@ -30,12 +30,12 @@ export default function Document() {
       <meta name="twitter:site" content="@th_clarence" />
       <meta name="twitter:title" content="Quiz o Marii Konopnickiej" />
       <meta name="twitter:description" content="Quiz o Marii Konopnickiej" />
-      <meta name="twitter:image" content="/images/konopnicka-tlo-02d1.png" />
+      <meta name="twitter:image" content="/images/polskieRadioLogo.png" />
 
       <meta name="msapplication-TileColor" content="#ffffff" />
       <meta
         name="msapplication-TileImage"
-        content="/images/faviconpr.png" //do zmiany//
+        content="/images/polskieRadioLogo.png"
       />
       <meta name="theme-color" content="#ffffff" />
       <meta name="next-head-count" content="21" />
