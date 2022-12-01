@@ -20,3 +20,11 @@ a {
 .slider-container {
   height: 100%;
 }
+
+.slider-control-centerleft, .slider-control-centerright {
+  pointer-events: none !important;
+}
+
+.slider-control-centerleft button, .slider-control-centerright button {
+  pointer-events: all;
+}

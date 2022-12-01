@@ -8,8 +8,15 @@ import CustomRadio from "../CustomRadio";
 import { ArrowButton } from "../ArrowButton";
 import { QUIZ_ID } from "../../config";
 import { ErrorMessage } from "@hookform/error-message";
+import Link from "next/link";
 
-export default function FormQuiz({ data, loginData, setIsQuizFinished }) {
+export default function FormQuiz({
+  data,
+  loginData,
+  setIsQuizEnded,
+  setError,
+  isQuizEnded,
+}) {
   const {
     register,
     handleSubmit,
@@ -57,20 +64,22 @@ export default function FormQuiz({ data, loginData, setIsQuizFinished }) {
         setIsQuizFinished(true);
         data(result.data);
       })
-      .catch((e) => console.log(e.message));
+      .catch((e) => {
+        setError(true);
+      });
   };
 
   return (
-    <section className="relative bg-black aspect-[320/1035] h-full">
-      <div className="absolute  top-0 right-0 w-10/12 aspect-[249/138] ">
+    <section className="relative bg-black aspect-[320/1035] h-full md:aspect-[1920/1080]">
+      <div className="absolute  top-0 right-0 w-10/12 h-1/7 aspect-[249/138] md:w-1/3 md:h-1/3">
         <Image src="/images/topRightYellowDots.png" layout="fill" />
       </div>
-      <div className="pt-28 w-[80%] m-auto  ">
-        <p className="text-center text-3xl font-bold font-oswald text-primary font-[600] uppercase pt-1 mb-16">
+      <div className="pt-28 w-[80%] m-auto max-w-[900px]">
+        <p className="text-center text-3xl md:text-[35px] font-bold font-oswald text-primary font-[600] uppercase pt-1 md:mt-[60px] mb-16">
           Co wiesz o Marii Konopnickiej?
         </p>
-        <SideBorderBox containerClass=" h-[550px]">
-          <form onSubmit={handleSubmit(submitAnswers)} className="h-full">
+        <SideBorderBox containerClass=" h-[550px]" className="z-1">
+          <form onSubmit={handleSubmit(submitAnswers)} className="h-full  p-2">
             <Carousel
               renderBottomCenterControls={false}
               slideIndex={activeIndex}
@@ -80,14 +89,14 @@ export default function FormQuiz({ data, loginData, setIsQuizFinished }) {
                   return (
                     <ArrowButton
                       onClick={nextSlide}
-                      className="w-[45px] h-[45px] left-full border-primary border-solid border-[2px] cursor-pointer top-1/2 -translate-y-1/2"
+                      className="w-[45px] h-[45px] border-primary border-solid border-[2px] md:border-[4px] cursor-pointer top-1/2 -translate-y-1/2 translate-x-10 md:w-[80px] md:h-[80px]  lg:w-[110px] lg:h-[110px] md:translate-x-[60px]"
                     />
                   );
                 return (
                   <ArrowButton
                     disabled={activeIndex === data.questions.length - 1}
                     onClick={nextSlide}
-                    className="hidden w-[45px] h-[45px] border-primary border-solid border-[2px] cursor-pointer top-1/2 -translate-y-1/2"
+                    className="hidden w-[45px] h-[45px] bg-black border-primary border-solid border-[2px]  cursor-pointer top-1/2 -translate-y-1/2 "
                   />
                 );
               }}
@@ -97,7 +106,7 @@ export default function FormQuiz({ data, loginData, setIsQuizFinished }) {
                   onClick={() => {
                     previousSlide();
                   }}
-                  className=" rotate-180 w-[45px] h-[45px] border-primary border-solid border-[2px] cursor-pointer right-full top-1/2 -translate-y-1/2"
+                  className=" rotate-180 w-[45px] h-[45px] border-primary border-solid border-[2px] md:border-[4px] cursor-pointer right-full top-1/2 -translate-y-1/2 md:translate-x-10  md:w-[80px] md:h-[80px] lg:w-[110px] lg:h-[110px]"
                 />
               )}
             >
@@ -108,15 +117,18 @@ export default function FormQuiz({ data, loginData, setIsQuizFinished }) {
                       {index + 1}
                     </div>
                     <div>
-                      <p className="text-[26px] font-bold font-oswald text-center pt-14 w-[70%] border-solid border-b-[1px] border-black m-auto">
+                      <p className="text-[22px] lg:text-[28px]  pb-4 min-[768px]:text-[26px] font-bold font-oswald text-center min-[425px]:pt-24 pt-14 md:pb-[60px] md:w-[80%] w-[70%] border-solid border-b-[1px] border-black m-auto">
                         {el.content}
                       </p>
                       {el.options?.map((element) => {
                         return (
-                          <div key={element.optionId} className="my-4">
+                          <div
+                            key={element.optionId}
+                            className="my-3 md:ml-4 mt-3"
+                          >
                             <label
                               htmlFor={String(element.optionId)}
-                              className=" px-5 font-oswald text-[24px] tracking-[.48px] flex items-center"
+                              className=" px-2 font-oswald text-[24px] md:text-[30px]  tracking-[.48px] flex items-center md:ml-4"
                             >
                               {el.options.length > 1 && (
                                 <>
@@ -124,7 +136,7 @@ export default function FormQuiz({ data, loginData, setIsQuizFinished }) {
                                     id={String(element.optionId)}
                                     type="radio"
                                     value={element.optionId}
-                                    className="text-black m-4 w-5 h-5 hidden"
+                                    className="text-black m-4 w-5 h-5 hidden "
                                     {...register(
                                       String(el.questionId),
 
@@ -143,13 +155,15 @@ export default function FormQuiz({ data, loginData, setIsQuizFinished }) {
                                   />
                                 </>
                               )}
-                              <div className="h-full w-[100%] flex flex-col">
-                                <p className="ml-4 ">{element.content}</p>
+                              <div className="h-full w-[100%] flex flex-col ">
+                                <p className="ml-2 md:ml-4 min-[425px]:my-1 min-[768px]:text-[24px] text-[22px] lg:text-[28px] ">
+                                  {element.content}
+                                </p>
                                 {el.options.length === 1 && (
                                   <input
                                     id={String(element.optionId)}
                                     type="text"
-                                    className="fill:bg-primary h-[180px] w-full bg-black  outline-0 text-white flex justify-center placeholder:text-white font-oswald text-[24px] "
+                                    className="fill:bg-primary h-[180px] md:h-[120px] w-full bg-black  outline-0 text-white flex justify-center placeholder:text-white font-oswald text-[24px] "
                                     {...register(String(el.questionId), {
                                       required: "To pole jest wymagane",
                                     })}
@@ -158,7 +172,7 @@ export default function FormQuiz({ data, loginData, setIsQuizFinished }) {
                               </div>
                             </label>
                             {index + 1 === data?.questions.length && (
-                              <div className="ml-5 mt-4">
+                              <div className="ml-2 mt-4 md:ml-9">
                                 <button
                                   type="submit"
                                   onClick={() => {
@@ -179,18 +193,34 @@ export default function FormQuiz({ data, loginData, setIsQuizFinished }) {
                       errors={errors}
                       name={String(el.questionId)}
                       render={({ message }) => (
-                        <p className="text-[red] font-oswald ml-5">{message}</p>
+                        <p className="text-[red] font-oswald ml-5 md:ml-10">
+                          {message}
+                        </p>
                       )}
                     />
-                    {/* <p>{errors[el.questionId]?.message}</p> */}
                   </div>
                 );
               })}
             </Carousel>
           </form>
         </SideBorderBox>
+        <div className="md:flex md:justify-end md:py-8 md:w-full">
+          <SideBorderBox
+            containerClass=" h-[87px] mt-12 md:mt-6 z-10 max-w-md  md:w-[280px]"
+            inverted={true}
+          >
+            <Link href="/">
+              <a
+                target="_blank"
+                className="text-[26px]  font-oswald h-full w-full flex justify-center items-center "
+              >
+                Regulamin konkursu
+              </a>
+            </Link>
+          </SideBorderBox>
+        </div>
       </div>
-      <div className="absolute bottom-0 left-0 w-10/12 z-0 aspect-[249/138]">
+      <div className="absolute bottom-0 left-0 w-10/12 z-0 aspect-[249/138]  md:w-1/4 md:h-1/4">
         <Image src="/images/bottomLeftYellowDots.png" layout="fill" />
       </div>
     </section>

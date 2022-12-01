@@ -1,10 +1,10 @@
 import clsxm from "../../lib/clsxm.js";
 export const SideBorderBox = ({ children, containerClass, inverted }) => {
   return (
-    <div className={clsxm("relative p-16 text-light", containerClass)}>
+    <div className={clsxm("relative py-16 text-light ", containerClass)}>
       <div
         className={clsxm(
-          "absolute top-4 -left-4 h-full w-full rounded-medium border-1 border-primary md:-top-10 md:-left-10 ",
+          "absolute top-4 -left-4 h-full w-full rounded-medium border-1 border-primary  ",
           containerClass,
           { "bg-primary": inverted, "bg-black": !inverted }
         )}
@@ -21,7 +21,7 @@ export const SideBorderBox = ({ children, containerClass, inverted }) => {
           }
         )}
       >
-        <div className="border-1 border-black h-full w-full">{children}</div>
+        <div className="border-1 border-black h-full w-full ">{children}</div>
       </div>
     </div>
   );
