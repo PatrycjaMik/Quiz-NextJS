@@ -29,15 +29,8 @@ export default function Home() {
   const loginData = watch();
 
   React.useEffect(() => {
-    const fetchQuizData = async () => {
-      const { data } = axios.get(
-        `https://votingresults.polskieradio.pl/api/quiz/${QUIZ_ID}/details`
-      );
-      console.log(data);
-      return data;
-    };
-    fetchQuizData();
-  }, []);
+    console.log({ isError });
+  }, [isError]);
 
   const shouldShowQuiz =
     !isQuizFinished &&
@@ -83,7 +76,7 @@ export default function Home() {
           <FormQuiz
             data={isLoggedIn}
             loginData={loginData}
-            setIsQuizEnded={setIsQuizFinished}
+            setIsQuizFinished={setIsQuizFinished}
             setError={setError}
           />
         )}

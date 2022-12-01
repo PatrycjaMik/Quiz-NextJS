@@ -68,7 +68,11 @@ export default function QuizStart({ setQuizData, loginForm, setVotedAlready }) {
                     required: true,
                   })}
                 />
-                {errors.userName && <span>podaj nazwę użytkownika</span>}
+                {errors.UserName && (
+                  <span className="font-oswald text-[14px] flex">
+                    podaj nazwę użytkownika
+                  </span>
+                )}
                 <label htmlFor="email"></label>
                 <input
                   placeholder="email"
@@ -79,7 +83,11 @@ export default function QuizStart({ setQuizData, loginForm, setVotedAlready }) {
                     required: true,
                   })}
                 />
-                {errors.Email && <span>wpisz swój email</span>}
+                {errors.Email && (
+                  <span className="font-oswald text-[14px] flex">
+                    wpisz swój email
+                  </span>
+                )}
               </div>
 
               <ArrowButton

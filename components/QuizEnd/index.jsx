@@ -4,47 +4,27 @@ import { SideBorderBox } from "../SideBorderBox";
 
 export default function QuizEnd() {
   return (
-    <section className="relative bg-black aspect-[320/1035] h-full">
-      <div className="absolute  top-0 right-0 w-10/12 aspect-[249/138] ">
+    <section className="relative bg-black h-full">
+      <div className="absolute  top-0 right-0 w-1/2 aspect-[249/138] md:w-1/3 md:h-1/4">
         <Image src="/images/topRightYellowDots.png" layout="fill" />
       </div>
 
-      <div className="pt-28 w-[80%] m-auto ">
+      <div className="pt-28 w-[80%] m-auto pb-10 md:pb-20">
         <p className="text-center text-3xl font-bold font-oswald text-primary font-[600] uppercase pt-1 mb-16">
           Co wiesz o Marii Konopnickiej?
         </p>
-        <SideBorderBox containerClass=" h-[550px]">
+        <SideBorderBox containerClass=" h-[550px] z-10 max-w-screen-md md:m-auto">
           <div className="flex justify-center items-center h-full">
-            <div className="border-b-[1px] border-t-[1px] border-black w-[80%] p-1 ">
-              <p className=" text-[40px] font-bold font-oswald text-center pb-8">
-                DZIĘKUJEMY ZA UDZIAŁ
+            <div className="border-b-[1px] border-t-[1px] border-black w-[80%] m-auto ">
+              <p className=" text-[30px] md:text-[40px] font-bold font-oswald text-center  p-4 ">
+                Dziękujemy za wzięcie udziału
               </p>
             </div>
           </div>
-
-          {/* <div className="mt-20 p-5 bg-transparent mr-5 ml-5">
-            <p className=" text-[26px] font-bold font-oswald text-center pb-8">
-              Dziękujemy za udział
-            </p>
-          </div> */}
-        </SideBorderBox>
-        <SideBorderBox
-          containerClass=" h-[87px] mt-12 z-10"
-          className=" w-[280px] "
-          inverted={true}
-        >
-          <Link href="/">
-            <a
-              target="_blank"
-              className="text-[26px]  font-oswald h-full w-full flex justify-center items-center"
-            >
-              Regulamin konkursu
-            </a>
-          </Link>
         </SideBorderBox>
       </div>
 
-      <div className="absolute bottom-0 left-0 w-10/12 z-0 aspect-[249/138]">
+      <div className="absolute bottom-0 left-0 w-1/2 z-0 aspect-[249/138] md:w-1/3 md:h-1/4">
         <Image src="/images/bottomLeftYellowDots.png" layout="fill" />
       </div>
     </section>
