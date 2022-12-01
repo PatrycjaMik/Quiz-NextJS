@@ -61,7 +61,7 @@ export default function FormQuiz({
         usersanswers
       )
       .then((result) => {
-        setIsQuizEnded(true);
+        setIsQuizFinished(true);
         data(result.data);
       })
       .catch((e) => {
