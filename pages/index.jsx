@@ -13,15 +13,15 @@ import YellowMenu from "../components/YellowMenu/YellowMenu";
 import ModalTerms from "../components/ModalTerms/ModalTerms";
 import ErrorModal from "../components/ErrorModal";
 import PreStart from "../components/PreStartQuiz";
-import QuizExpired from "../components/QuizExpired";
-import VotedAlready from "../components/VotedAlready";
+// import QuizExpired from "../components/QuizExpired";
+// import VotedAlready from "../components/VotedAlready";
 
 export default function Home() {
   const [isLoggedIn, setLoggedIn] = React.useState(false);
   const [isQuizFinished, setIsQuizFinished] = React.useState(false);
   const [isQuizAvailable, setQuizAvailable] = React.useState(false);
   const [isQuizExpired, setQuizExpired] = React.useState(false);
-  const [isVotedAlready, setVotedAlready] = React.useState(false);
+  // const [isVotedAlready, setVotedAlready] = React.useState(false);
   const [isError, setError] = React.useState(false);
   const loginForm = useForm();
 
@@ -33,11 +33,7 @@ export default function Home() {
   }, [isError]);
 
   const shouldShowQuiz =
-    !isQuizFinished &&
-    !isQuizExpired &&
-    !isVotedAlready &&
-    isQuizAvailable &&
-    !isError;
+    !isQuizFinished && !isQuizExpired && isQuizAvailable && !isError;
 
   React.useEffect(() => {
     const fetchQuizAvailability = async () => {
@@ -60,7 +56,7 @@ export default function Home() {
       <main style={{ marginTop: "170px" }}>
         <Hero expired={isQuizExpired} />
         {!shouldShowQuiz && !isQuizAvailable && !isQuizExpired && <PreStart />}
-        {!shouldShowQuiz && isVotedAlready && <VotedAlready />}
+        {/* {!shouldShowQuiz && isVotedAlready && <VotedAlready />} */}
         {!shouldShowQuiz && isQuizFinished && <QuizEnd />}
         {!shouldShowQuiz && isError && (
           <ErrorModal setError={setError} setLoggedIn={setLoggedIn} />
@@ -69,7 +65,7 @@ export default function Home() {
           <QuizStart
             setQuizData={setLoggedIn}
             loginForm={loginForm}
-            setVotedAlready={setVotedAlready}
+            // setVotedAlready={setVotedAlready}
           />
         )}
         {isLoggedIn && shouldShowQuiz && (

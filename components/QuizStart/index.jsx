@@ -30,8 +30,8 @@ export default function QuizStart({ setQuizData, loginForm, setVotedAlready }) {
       })
       .catch((e) => {
         console.log({ e });
-        if (e?.response?.data?.Message === "VotedAlready")
-          setVotedAlready(true);
+        // if (e?.response?.data?.Message === "VotedAlready")
+        //   setVotedAlready(true);
       });
   };
   return (

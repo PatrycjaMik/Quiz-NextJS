@@ -123,7 +123,7 @@ export default function FormQuiz({
                       {index + 1}
                     </div>
                     <div>
-                      <p className="text-[20px] lg:text-[28px]  pb-4 min-[768px]:text-[23px] min-[1100px]:text-[28px] font-bold font-oswald text-center min-[425px]:pt-24 pt-14 md:pb-[60px] md:w-[80%] w-[70%] border-solid border-b-[1px] border-black m-auto">
+                      <p className="text-[20px]  pb-4 min-[768px]:text-[23px] min-[1100px]:text-[28px] font-bold font-oswald text-center min-[425px]:pt-24 pt-14 md:pb-[60px] md:w-[80%] w-[70%] border-solid border-b-[1px] border-black m-auto">
                         {el.content}
                       </p>
                       {el.options?.map((element) => {
