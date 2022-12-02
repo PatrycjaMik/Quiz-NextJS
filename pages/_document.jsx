@@ -18,18 +18,21 @@ export default function Document() {
       />
       <link rel="shortcut icon" type="image/png" href="/images/faviconpr.png" />
 
-      <meta property="og:title" content="Quiz o Marii Konopnickiej" />
+      <meta property="og:title" content="Co wiesz o Marii Konopnickiej?" />
       <meta property="og:url" content="/" />
       <meta property="og:type" content="website" />
       <meta property="og:image" content="/images/polskieRadioLogo.png" />
       <meta
         property="og:description"
-        content="Quiz o Marii Konopnickiej. Sprawdź się i wygraj radioodbiornik."
+        content=" Najwybitniejsza poetka okresu realizmu, nowelistka, pisarka dla dzieci, publicystka i tłumaczka jest patronką roku 2022. Z tej okazji przygotowaliśmy quiz wiedzy o Marii Konopnickiej. W dniach 6-12 grudnia na stronie internetowej Czwórki znajdziecie pytania dotyczące jej życia, przyjaźni i zainteresowań. Żeby wygrać nagrodę trzeba udzielić poprawnych odpowiedzi oraz ciekawie odpowiedzieć na pytanie otwarte. Dla 5 zwycięzców mamy do zgarnięcia nowoczesny głośnik Bluetooth z radiem cyfrowym DAB+ i FM. Wyniki quizu poznamy 13.12. w audycji Pierwsze Słyszę."
       />
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:site" content="@th_clarence" />
-      <meta name="twitter:title" content="Quiz o Marii Konopnickiej" />
-      <meta name="twitter:description" content="Quiz o Marii Konopnickiej" />
+      <meta name="twitter:title" content="Co wiesz o Marii Konopnickiej?" />
+      <meta
+        name="twitter:description"
+        content=" Najwybitniejsza poetka okresu realizmu, nowelistka, pisarka dla dzieci, publicystka i tłumaczka jest patronką roku 2022. Z tej okazji przygotowaliśmy quiz wiedzy o Marii Konopnickiej. W dniach 6-12 grudnia na stronie internetowej Czwórki znajdziecie pytania dotyczące jej życia, przyjaźni i zainteresowań. Żeby wygrać nagrodę trzeba udzielić poprawnych odpowiedzi oraz ciekawie odpowiedzieć na pytanie otwarte. Dla 5 zwycięzców mamy do zgarnięcia nowoczesny głośnik Bluetooth z radiem cyfrowym DAB+ i FM. Wyniki quizu poznamy 13.12. w audycji Pierwsze Słyszę."
+      />
       <meta name="twitter:image" content="/images/polskieRadioLogo.png" />
 
       <meta name="msapplication-TileColor" content="#ffffff" />

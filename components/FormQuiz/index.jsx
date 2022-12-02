@@ -215,7 +215,7 @@ export default function FormQuiz({
             containerClass=" h-[87px] mt-12 md:mt-6 z-10 max-w-md  md:w-[280px]"
             inverted={true}
           >
-            <Link href="/">
+            <Link href="/docs/Regulamin_Quiz_Maria_Konopnicka_grudzien_2022.pdf">
               <a
                 target="_blank"
                 className="text-[26px]  font-oswald h-full w-full flex justify-center items-center "

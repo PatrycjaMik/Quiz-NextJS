@@ -60,7 +60,7 @@ export default function QuizStart({ setQuizData, loginForm, setVotedAlready }) {
                 <label htmlFor="username"></label>
                 <div className="bg-black p-5  min-[768px]:mr-4 lg:w-[470px]">
                   <input
-                    placeholder="username"
+                    placeholder="imię"
                     id="UserName"
                     type="text"
                     required
@@ -109,7 +109,7 @@ export default function QuizStart({ setQuizData, loginForm, setVotedAlready }) {
             containerClass=" h-[87px] my-12  md:mt-6 z-10 max-w-md  md:w-[280px]"
             inverted={true}
           >
-            <Link href="/">
+            <Link href="/docs/Regulamin_Quiz_Maria_Konopnicka_grudzien_2022.pdf">
               <a
                 target="_blank"
                 className="text-[26px]  font-oswald h-full w-full flex justify-center items-center "

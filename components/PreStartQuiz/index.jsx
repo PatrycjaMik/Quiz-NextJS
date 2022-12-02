@@ -28,7 +28,7 @@ export default function PreStart() {
             className="  py-8"
             inverted={true}
           >
-            <Link href="/">
+            <Link href="/docs/Regulamin_Quiz_Maria_Konopnicka_grudzien_2022.pdf">
               <a
                 target="_blank"
                 className="text-[26px]  font-oswald h-full w-full flex justify-center items-center "
