@@ -11,7 +11,7 @@ export default function Document() {
         name="description"
         content="Quiz o Marii Konopnickiej. Sprawdź się i wygraj radioodbiornik."
       />
-      <link rel="canonical" href="/"></link>
+      <link rel="canonical" href="https://quizczworka.polskieradio.pl/"></link>
       <meta
         name="keywords"
         content="quiz, maria konopnicka, nagroda, czwórka, polskieradio"
@@ -19,7 +19,7 @@ export default function Document() {
       <link rel="shortcut icon" type="image/png" href="/images/faviconpr.png" />
 
       <meta property="og:title" content="Co wiesz o Marii Konopnickiej?" />
-      <meta property="og:url" content="/" />
+      <meta property="og:url" content="https://quizczworka.polskieradio.pl/" />
       <meta property="og:type" content="website" />
       <meta property="og:image" content="/images/polskieRadioLogo.png" />
       <meta

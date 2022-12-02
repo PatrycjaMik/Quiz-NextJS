@@ -70,7 +70,7 @@ export default function QuizStart({ setQuizData, loginForm, setVotedAlready }) {
                     })}
                   />
                   {errors.UserName && (
-                    <span className="font-oswald text-[14px] flex">
+                    <span className="font-oswald text-[14px] flex text-white">
                       podaj nazwę użytkownika
                     </span>
                   )}
@@ -85,7 +85,7 @@ export default function QuizStart({ setQuizData, loginForm, setVotedAlready }) {
                     })}
                   />
                   {errors.Email && (
-                    <span className="font-oswald text-[14px] flex">
+                    <span className="font-oswald text-[14px] flex text-white">
                       wpisz swój email
                     </span>
                   )}
