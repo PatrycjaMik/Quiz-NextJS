@@ -23,7 +23,7 @@ export default function Document() {
       <meta property="og:type" content="website" />
       <meta
         property="og:image"
-        content="//static.prsa.pl/7d9b9976-43fd-4a27-86b0-883c84099c4c.file"
+        content="https://static.prsa.pl/images/7d9b9976-43fd-4a27-86b0-883c84099c4c.jpg"
       />
       <meta
         property="og:description"
