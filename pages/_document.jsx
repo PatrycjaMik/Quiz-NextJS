@@ -9,7 +9,7 @@ export default function Document() {
       <meta name="robots" content="follow, index" />
       <meta
         name="description"
-        content="Quiz o Marii Konopnickiej. Sprawdź się i wygraj radioodbiornik."
+        content="Najwybitniejsza poetka okresu realizmu, nowelistka, pisarka dla dzieci, publicystka i tłumaczka jest patronką roku 2022. Z tej okazji przygotowaliśmy quiz wiedzy o Marii Konopnickiej. W dniach 6-12 grudnia na stronie internetowej Czwórki znajdziecie pytania dotyczące jej życia, przyjaźni i zainteresowań. Żeby wygrać nagrodę trzeba udzielić poprawnych odpowiedzi oraz ciekawie odpowiedzieć na pytanie otwarte. Dla 5 zwycięzców mamy do zgarnięcia nowoczesny głośnik Bluetooth z radiem cyfrowym DAB+ i FM. Wyniki quizu poznamy 13.12. w audycji Pierwsze Słyszę."
       />
       <link rel="canonical" href="https://quizczworka.polskieradio.pl/"></link>
       <meta
@@ -21,7 +21,10 @@ export default function Document() {
       <meta property="og:title" content="Co wiesz o Marii Konopnickiej?" />
       <meta property="og:url" content="https://quizczworka.polskieradio.pl/" />
       <meta property="og:type" content="website" />
-      <meta property="og:image" content="/images/polskieRadioLogo.png" />
+      <meta
+        property="og:image"
+        content="//static.prsa.pl/7d9b9976-43fd-4a27-86b0-883c84099c4c.file"
+      />
       <meta
         property="og:description"
         content=" Najwybitniejsza poetka okresu realizmu, nowelistka, pisarka dla dzieci, publicystka i tłumaczka jest patronką roku 2022. Z tej okazji przygotowaliśmy quiz wiedzy o Marii Konopnickiej. W dniach 6-12 grudnia na stronie internetowej Czwórki znajdziecie pytania dotyczące jej życia, przyjaźni i zainteresowań. Żeby wygrać nagrodę trzeba udzielić poprawnych odpowiedzi oraz ciekawie odpowiedzieć na pytanie otwarte. Dla 5 zwycięzców mamy do zgarnięcia nowoczesny głośnik Bluetooth z radiem cyfrowym DAB+ i FM. Wyniki quizu poznamy 13.12. w audycji Pierwsze Słyszę."
@@ -33,7 +36,10 @@ export default function Document() {
         name="twitter:description"
         content=" Najwybitniejsza poetka okresu realizmu, nowelistka, pisarka dla dzieci, publicystka i tłumaczka jest patronką roku 2022. Z tej okazji przygotowaliśmy quiz wiedzy o Marii Konopnickiej. W dniach 6-12 grudnia na stronie internetowej Czwórki znajdziecie pytania dotyczące jej życia, przyjaźni i zainteresowań. Żeby wygrać nagrodę trzeba udzielić poprawnych odpowiedzi oraz ciekawie odpowiedzieć na pytanie otwarte. Dla 5 zwycięzców mamy do zgarnięcia nowoczesny głośnik Bluetooth z radiem cyfrowym DAB+ i FM. Wyniki quizu poznamy 13.12. w audycji Pierwsze Słyszę."
       />
-      <meta name="twitter:image" content="/images/polskieRadioLogo.png" />
+      <meta
+        name="twitter:image"
+        content="//static.prsa.pl/00f81d7c-4ec4-498f-af83-2711e422cabc.file"
+      />
 
       <meta name="msapplication-TileColor" content="#ffffff" />
       <meta
