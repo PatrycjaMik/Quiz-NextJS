@@ -13,15 +13,13 @@ import YellowMenu from "../components/YellowMenu/YellowMenu";
 import ModalTerms from "../components/ModalTerms/ModalTerms";
 import ErrorModal from "../components/ErrorModal";
 import PreStart from "../components/PreStartQuiz";
-// import QuizExpired from "../components/QuizExpired";
-// import VotedAlready from "../components/VotedAlready";
+import Winners from "../components/Winners";
 
 export default function Home() {
   const [isLoggedIn, setLoggedIn] = React.useState(false);
   const [isQuizFinished, setIsQuizFinished] = React.useState(false);
   const [isQuizAvailable, setQuizAvailable] = React.useState(false);
   const [isQuizExpired, setQuizExpired] = React.useState(false);
-  // const [isVotedAlready, setVotedAlready] = React.useState(false);
   const [isError, setError] = React.useState(false);
   const loginForm = useForm();
 
@@ -56,17 +54,12 @@ export default function Home() {
       <main style={{ marginTop: "170px" }}>
         <Hero expired={isQuizExpired} />
         {!shouldShowQuiz && !isQuizAvailable && !isQuizExpired && <PreStart />}
-        {/* {!shouldShowQuiz && isVotedAlready && <VotedAlready />} */}
         {!shouldShowQuiz && isQuizFinished && <QuizEnd />}
         {!shouldShowQuiz && isError && (
           <ErrorModal setError={setError} setLoggedIn={setLoggedIn} />
         )}
         {!isLoggedIn && shouldShowQuiz && (
-          <QuizStart
-            setQuizData={setLoggedIn}
-            loginForm={loginForm}
-            // setVotedAlready={setVotedAlready}
-          />
+          <QuizStart setQuizData={setLoggedIn} loginForm={loginForm} />
         )}
         {isLoggedIn && shouldShowQuiz && (
           <FormQuiz
@@ -76,6 +69,7 @@ export default function Home() {
             setError={setError}
           />
         )}
+        <Winners />
         <Prize />
       </main>
       <ModalTerms />
