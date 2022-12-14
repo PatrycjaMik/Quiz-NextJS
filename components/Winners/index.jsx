@@ -15,7 +15,7 @@ export default function Winners() {
           </p>
           <SideBorderBox containerClass="h-[1700px] min-[425px]:h-[1600px]  z-10">
             <div className="flex justify-center items-center flex-col min-[425px]:h-full">
-              <div className="border-b-[1px] border-black w-[90%] m-auto pb-[30px] mt-4 h-full">
+              <div className="border-b-[1px] border-black flex justify-center items-center w-[90%] m-auto pb-[30px] mt-4 h-full">
                 <p className=" text-[17px]  md:text-[35px] md:mt-10 font-bold font-oswald text-center mt-4 p-1 min-[400px]:text-[24px] min-[600px]:text-[30px] min-[425px]:mb-4 ">
                   Oto nasi zwycięzcy, którzy poprawnie odpowiedzieli na
                   wszystkie pytania i przygotowali ciekawe odpowiedzi kreatywne,
