@@ -42,7 +42,7 @@ export default function Winners() {
                   się ukryć pracą wymęczonych, Dziwiło się bardzo, skąd w nich
                   tyle mocy, - Ja tak na nich działam! rzekło w stronę nocy, -
                   To radio ktoś włączył - księżyc stwierdził właśnie, Jak
-                  "Czwórki" słuchają siła w nich nie gaśnie &#128522;
+                  &quot;Czwórki&quot; słuchają siła w nich nie gaśnie &#128522;
                 </p>
                 <p className="text-[26px] md:text-[35px] min-[600px]:text-[30px] font-[600] font-oswald mt-[10%]">
                   Natalia
