@@ -3,9 +3,9 @@ import { SideBorderBox } from "../SideBorderBox";
 
 export default function Winners() {
   return (
-    <section className="relative bg-black">
-      <div className="absolute  top-0 right-0 w-1/2  md:w-2/3 md:h-1/5">
-        <Image src="/images/topRightYellowDots.png" layout="fill" />
+    <section className="relative bg-black aspect-[320/1035] md:aspect-[1980/1080] h-full">
+      <div className="absolute  top-0 right-0 w-1/2  md:w-1/3 md:h-1/5">
+        <Image src="/images/topRightYellowDots.png" layout="fill" alt="" />
       </div>
 
       <div className="pt-28 w-[85%] m-auto pb-10 md:pb-20">
@@ -32,7 +32,7 @@ export default function Winners() {
                   mądrości, Vaneska z Nikolą uczyły życzliowści. Zero głupich
                   komentarzy, wyglądu krytki, Zrozumieniem drugiego mieorzone
                   wyniki. Bo tak juz przecież jest ułożona planeta, - Tam gdzie
-                  pada słonko, to nie ma darkenta :)
+                  pada słonko, to nie ma darkenta &#128522;
                 </p>
                 <p className="text-[26px] md:text-[35px] min-[600px]:text-[30px] font-[600] font-oswald mt-[10%]">
                   Czesław
@@ -42,7 +42,7 @@ export default function Winners() {
                   się ukryć pracą wymęczonych, Dziwiło się bardzo, skąd w nich
                   tyle mocy, - Ja tak na nich działam! rzekło w stronę nocy, -
                   To radio ktoś włączył - księżyc stwierdził właśnie, Jak
-                  "Czwórki" słuchają siła w nich nie gaśnie:)
+                  "Czwórki" słuchają siła w nich nie gaśnie &#128522;
                 </p>
                 <p className="text-[26px] md:text-[35px] min-[600px]:text-[30px] font-[600] font-oswald mt-[10%]">
                   Natalia
@@ -73,8 +73,8 @@ export default function Winners() {
         </div>
       </div>
 
-      <div className="absolute bottom-0 left-0 w-1/2 z-0 aspect-[249/138] md:w-2/3 md:h-1/5">
-        <Image src="/images/bottomLeftYellowDots.png" layout="fill" />
+      <div className="absolute bottom-0 left-0 w-1/2 z-0 aspect-[249/138] md:w-1/3 md:h-1/5">
+        <Image src="/images/bottomLeftYellowDots.png" layout="fill" alt="" />
       </div>
     </section>
   );
