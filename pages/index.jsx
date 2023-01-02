@@ -6,7 +6,6 @@ import Prize from "../components/Prize";
 import QuizEnd from "../components/QuizEnd";
 import axios from "axios";
 import { QUIZ_ID } from "../config";
-
 import { useForm } from "react-hook-form";
 import SmallerBlackMenu from "../components/SmallerBlackMenu/SmallerBlackMenu";
 import YellowMenu from "../components/YellowMenu/YellowMenu";
@@ -14,6 +13,7 @@ import ModalTerms from "../components/ModalTerms/ModalTerms";
 import ErrorModal from "../components/ErrorModal";
 import PreStart from "../components/PreStartQuiz";
 import Winners from "../components/Winners";
+
 
 export default function Home() {
   const [isLoggedIn, setLoggedIn] = React.useState(false);
@@ -70,8 +70,6 @@ export default function Home() {
           />
         )}
         <Winners />
-        <Prize />
-      </main>
       <ModalTerms />
     </div>
   );
