@@ -1,0 +1,39 @@
+image: node:16
+
+stages:
+- build
+- image-build
+- deploy-test
+
+include:
+  - project: 'polskieradio/cms/ci-cd-templates'
+    ref: master
+    file: build-docker-images.yml
+  - project: 'polskieradio/cms/ci-cd-templates'
+    ref: master
+    file: pr-vpn-connection.yml
+  - project: 'polskieradio/cms/ci-cd-templates'
+    ref: master
+    file: k8s-cluster-config.yml
+
+cache:
+  paths:
+    - node_modules/
+
+build:
+  stage: build
+  script:
+    - npm install
+    - npm run build
+
+docker-build:
+  extends: .pr-docker-build
+  stage: image-build
+  needs: ['build']
+  when: manual
+
+deploy-test:
+  extends: .pr-k8s-deploy-v2
+  stage: deploy-test
+  needs: ['docker-build']
+  when: manual
